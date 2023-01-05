@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); //getting mongoose
 
 const CONNECTION_STRING = 'mongodb://127.0.0.1:27017/cookIt';
 
