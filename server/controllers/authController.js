@@ -6,15 +6,18 @@ authController.post('/login', async (req, res) => {
 
         const body = req.body;
 
+        console.log(body)
         const token = await login(body)
 
         res.send({
-            succsess: true,
+            success: true,
             result: token,
         });
     } catch (err) {
+
+        console.log(err.message)
         res.send({
-            succsess: false,
+            success: false,
             message: err.message,
         })
     }
@@ -28,12 +31,12 @@ authController.post('/register', async (req, res) => {
         const token = await register(body)
 
         res.send({
-            succsess: true,
+            success: true,
             result: token,
         });
     } catch (err) {
         res.send({
-            succsess: false,
+            success: false,
             message: err.message,
         })
     }
@@ -44,13 +47,13 @@ authController.get('/users', async (req, res) => {
     try{
         const result = await getAllUsers();
         res.send({
-            succsess: true,
+            success: true,
             result: result,
         });
 
     }catch(err){
         res.send({
-            succsess: true,
+            success: true,
             error: err.message,
         });
     }
