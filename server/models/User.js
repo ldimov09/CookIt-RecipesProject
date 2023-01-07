@@ -6,7 +6,7 @@ const userSchema = new Schema({
     hashedPassword: { type: String, required: true },
     username: { type: String, required: true },
     myRecipes: [{ type: Types.ObjectId, ref: 'Recipes', default: [] }],
-    reports: { type: Types.ObjectId, ref: 'Users', required: true },
+    reports: { type: Number, ref: 'Users', required: true },
 });
 
 userSchema.index({ email: 1 }, {
@@ -18,4 +18,5 @@ userSchema.index({ email: 1 }, {
     }
 });
 
-module.exports = model('Users', userSchema);
+const Users = model('Users', userSchema);
+module.exports = Users;

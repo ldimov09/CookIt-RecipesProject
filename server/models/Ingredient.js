@@ -5,4 +5,4 @@ const ingredientsSchema = new Schema({
     imageUrl: { type: String, required: true },
 });
 
-module.exports = model('ingredients', ingredientsSchema);
+module.exports = model('Ingredients', ingredientsSchema);

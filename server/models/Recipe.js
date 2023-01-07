@@ -5,9 +5,9 @@ const recipeSchema = new Schema({
     tags: [{ type: Types.ObjectId, ref: 'Tags', default: []}],
     imageUrl: {type: String, required: true},
     title: {type: String, required: true},
-    ingredients: [{type: Types.ObjectId, ref: 'Ingredient', default: [] }],
+    ingredients: [{type: Types.ObjectId, ref: 'Ingredients', default: [] }],
     description: {type: String, required: true},
-    comments: [{type: Types.ObjectId, ref: 'Comment', default: []}],
+    comments: [{type: Types.ObjectId, ref: 'Comments', default: []}],
     likes: [{ type: Types.ObjectId, ref: 'Users', default: [] }],
     dislikes: [{ type: Types.ObjectId, ref: 'Users', default: [] }],
 });
