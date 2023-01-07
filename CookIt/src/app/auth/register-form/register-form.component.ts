@@ -21,6 +21,22 @@ export class RegisterFormComponent {
     PasswordValidators.passwordShouldMatch
   );
 
+  get Email() {
+    return this.form.get('email')
+  }
+
+  get Password() {
+    return this.form.get('password')
+  }
+
+  get Username() {
+    return this.form.get('username')
+  }
+
+  get Repass() {
+    return this.form.get('repassword')
+  }
+
   handleRegister(form: FormGroup) {
     const { username, email, password } = form.value;
     this.service.createUser({ username, email, password }).subscribe({
