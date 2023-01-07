@@ -1,15 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { JwtHelperService } from "@auth0/angular-jwt";
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   private url: string = 'http://localhost:3000/api/auth/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   get user() {
     let token = localStorage.getItem('token');
@@ -19,8 +18,11 @@ export class AuthService {
     return helper.decodeToken(token);
   }
 
-
-  loginUser(payload: { email: string, password: string }) {
+  loginUser(payload: { email: string; password: string }) {
     return this.http.post(this.url + 'login', payload);
+  }
+
+  createUser(payload: {username:string, email: string; password: string }) {
+    return this.http.post(this.url + 'register', payload);
   }
 }
