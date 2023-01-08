@@ -25,4 +25,10 @@ export class AuthService {
   createUser(payload: {username:string, email: string; password: string }) {
     return this.http.post(this.url + 'register', payload);
   }
+
+  isLoggedIn(){
+    const token = localStorage.getItem('token');
+    if (!token) return false;
+    return true;
+  }
 }

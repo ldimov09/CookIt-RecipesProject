@@ -1,14 +1,16 @@
 <h1>Register Form</h1>
 <form [formGroup]="form" (ngSubmit)="handleRegister(form)">
     <div class="form-floating mb-3">
-        <input formControlName="username" type="username" class="form-control" id="floatingInput" placeholder="Peter Stoynov">
+        <input formControlName="username" type="username" class="form-control" id="floatingInput"
+            placeholder="Peter Stoynov">
         <label for="floatingInput">Username</label>
     </div>
     <div *ngIf="Username?.touched && Username?.invalid" class="alert alert-danger">
         <div *ngIf="Username?.errors?.['required']">Username is required.</div>
     </div>
     <div class="form-floating mb-3">
-        <input formControlName="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <input formControlName="email" type="email" class="form-control" id="floatingInput"
+            placeholder="name@example.com">
         <label for="floatingInput">Email address</label>
     </div>
     <div *ngIf="Email?.touched && Email?.invalid" class="alert alert-danger">
@@ -16,21 +18,24 @@
         <div *ngIf="Email?.errors?.['email']">Invalid email.</div>
     </div>
     <div class="form-floating mb-3">
-        <input formControlName="password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <input formControlName="password" type="password" class="form-control" id="floatingPassword"
+            placeholder="Password">
         <label for="floatingPassword">Password</label>
     </div>
     <div *ngIf="Password?.touched && Password?.invalid" class="alert alert-danger">
         <div *ngIf="Password?.errors?.['required']">Password is required.</div>
     </div>
     <div class="form-floating mb-3">
-        <input formControlName="repassword" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <input formControlName="repassword" type="password" class="form-control" id="floatingPassword"
+            placeholder="Password">
         <label for="floatingPassword">Repeat Password</label>
     </div>
     <div *ngIf="Repass?.touched && Repass?.invalid" class="alert alert-danger">
         <div *ngIf="Repass?.errors?.['required']">Repeat password is required.</div>
-       
+
     </div>
-    <div *ngIf="form.invalid && form.errors?.['passwordShouldMatch'] && Repass?.valid" class="alert alert-danger">Passwords do not match.</div>
+    <div *ngIf="form.invalid && form.errors?.['passwordShouldMatch'] && Repass?.valid" class="alert alert-danger">
+        Passwords do not match.</div>
 
     <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Register</button>
 </form>
