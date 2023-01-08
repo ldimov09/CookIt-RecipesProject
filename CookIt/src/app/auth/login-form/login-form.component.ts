@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class LoginFormComponent {
   message: string | null = null;
   success: boolean | null = null;
 
-  constructor(private service: AuthService) {}
+  constructor(private service: AuthService, private router: Router) {}
 
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -39,6 +40,8 @@ export class LoginFormComponent {
           console.log('Login successful', response.result); // Warning! Console.log! Remove later!
           const token = response.result; 
           localStorage.setItem('token', token);
+          this.router.navigate(['/']);
+
         }
       },
     });

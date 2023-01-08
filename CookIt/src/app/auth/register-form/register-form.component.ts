@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { PasswordValidators } from './password-validator';
 
@@ -9,7 +10,7 @@ import { PasswordValidators } from './password-validator';
   styleUrls: ['./register-form.component.scss'],
 })
 export class RegisterFormComponent {
-  constructor(private service: AuthService) {}
+  constructor(private service: AuthService, private router: Router) { }
 
   form = new FormGroup(
     {
@@ -47,6 +48,8 @@ export class RegisterFormComponent {
           console.log('Register successful', response.result); // Warning! Console.log! Remove later!
           const token = response.result;
           localStorage.setItem('token', token);
+          this.router.navigate(['/']);
+          
         }
       },
     });
