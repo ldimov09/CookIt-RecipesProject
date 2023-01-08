@@ -37,7 +37,7 @@ authController.post('/register', async (req, res) => {
     } catch (err) {
         res.send({
             success: false,
-            message: err.message,
+            error: err.message,
         })
     }
 

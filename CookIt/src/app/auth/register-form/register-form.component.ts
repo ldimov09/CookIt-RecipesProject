@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
@@ -10,6 +10,11 @@ import { PasswordValidators } from './password-validator';
   styleUrls: ['./register-form.component.scss'],
 })
 export class RegisterFormComponent {
+
+  @Output() newErrorEvent = new EventEmitter<string>();
+
+  errorMessage!: string;
+
   constructor(private service: AuthService, private router: Router) { }
 
   form = new FormGroup(
@@ -43,7 +48,8 @@ export class RegisterFormComponent {
     this.service.createUser({ username, email, password }).subscribe({
       next: (response: any) => {
         if (!response.success) {
-          console.log('Register failed', response.error); // Warning! Console.log! Remove later!
+          console.log(response)
+          this.emitError(response.error);
         } else {
           console.log('Register successful', response.result); // Warning! Console.log! Remove later!
           const token = response.result;
@@ -53,5 +59,9 @@ export class RegisterFormComponent {
         }
       },
     });
+  }
+
+  emitError(error: string) {
+    this.newErrorEvent.emit(error);
   }
 }

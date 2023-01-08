@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { LoginFormComponent } from './auth/login-form/login-form.component';
+import { RegisterFormComponent } from './auth/register-form/register-form.component';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +10,41 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'CookIt';
+
+  constructor(private router: Router){
+    this.router.events.subscribe({
+      next: (event: any) => {
+          this.showWarning = false;
+      }
+    })
+  }
+
+  title = 'Jobs-MG';
+
+  error!: string;
+  subscription!: Subscription;
+  showWarning: boolean = false;
+
+  subscribeToEventEmitter(elementRef: any) {
+    if(elementRef instanceof RegisterFormComponent || elementRef instanceof LoginFormComponent){
+      const child: LoginFormComponent | RegisterFormComponent  = elementRef;
+      
+      child.newErrorEvent.subscribe((response) => {
+        this.error = response;
+        this.showWarning = true;
+      })}
+
+  }
+
+  unsubscribeFromEventEmitter() {
+    if(this.subscription) {
+      console.log('unsubscribed from event');
+      this.subscription.unsubscribe();
+    }
+  }
+
+  closeAlert() {
+    this.showWarning = false;
+  }
 }
+

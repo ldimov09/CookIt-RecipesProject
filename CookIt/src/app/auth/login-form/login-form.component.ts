@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
@@ -12,7 +12,12 @@ export class LoginFormComponent {
   message: string | null = null;
   success: boolean | null = null;
 
-  constructor(private service: AuthService, private router: Router) {}
+  @Output() newErrorEvent = new EventEmitter<string>();
+
+  errorMessage!: string;
+
+
+  constructor(private service: AuthService, private router: Router) { }
 
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -33,17 +38,22 @@ export class LoginFormComponent {
         console.log(response);
         if (!response.success) {
           this.message = response.message;
-		  this.success = response.success
+          this.success = response.success
 
-          console.log('Login failed', response.error); // Warning! Console.log! Remove later!
+          this.emitError(response.message);
+
         } else {
           console.log('Login successful', response.result); // Warning! Console.log! Remove later!
-          const token = response.result; 
+          const token = response.result;
           localStorage.setItem('token', token);
           this.router.navigate(['/']);
 
         }
       },
     });
+  }
+
+  emitError(error: string) {
+    this.newErrorEvent.emit(error);
   }
 }

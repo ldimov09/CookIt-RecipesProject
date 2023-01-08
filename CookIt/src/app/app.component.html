@@ -1,6 +1,15 @@
 <main>
     <navigation></navigation>
-    <div class="content">
-        <router-outlet></router-outlet>
+    <div class="constainer">
+        
+        <div class="content">
+            <div class="alert alert-danger alert-dismissible fade show" *ngIf="showWarning" role="alert">
+                {{error}}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" (click)="closeAlert()"></button>
+            </div>
+        
+            <router-outlet (activate)="subscribeToEventEmitter($event) " (deactivate)="unsubscribeFromEventEmitter()"></router-outlet>
+        </div>
     </div>
+    
 </main>
