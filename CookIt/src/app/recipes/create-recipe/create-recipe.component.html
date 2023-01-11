@@ -1,0 +1,26 @@
+<section class="centered">
+    <h3>Create your recipe here</h3>
+    <form [formGroup]="form" (ngSubmit)="handleCreate(form)">
+        <div class="form-floating mb-2">
+            <input formControlName="title" type="text" class="form-control" id="floatingPassword" placeholder="Title">
+            <label for="floatingPassword">Title</label>
+        </div>
+        <div class="form-floating mb-2"> <!-- HUGE TODO add Ingredient system-->
+            <textarea class="form-control" formControlName="ingredients" placeholder="Ingredients" id="floatingTextarea2" style="height: 100px"></textarea>
+            <label for="floatingTextarea2">Ingredients (temp textarea)</label>
+        </div>
+        <div class="form-floating mb-2">
+            <textarea class="form-control" formControlName="description" placeholder="Instructions" id="floatingTextarea2" style="height: 100px"></textarea>
+            <label for="floatingTextarea2">Instructions</label>
+        </div>
+        <div class="form-floating mb-2">
+            <input formControlName="imageUrl" type="text" class="form-control" id="floatingPassword" placeholder="Title">
+            <label for="floatingPassword">Image Url</label>
+        </div>
+        <div class="form-floating mb-2"> <!-- HUGE TODO add tag system-->
+            <textarea class="form-control" formControlName="tags" placeholder="Tags" id="floatingTextarea2" style="height: 100px"></textarea>
+            <label for="floatingTextarea2">Tags (temp textarea)</label>
+        </div>
+        <button type="submit" [disabled]="form.invalid" class="btn btn-success">Create</button>
+    </form>
+</section>

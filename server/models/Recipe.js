@@ -13,5 +13,5 @@ const recipeSchema = new Schema({
 });
 
 
-
-module.exports = model('Recipes', recipeSchema);
+const Recipe = model('Recipes', recipeSchema);
+module.exports = Recipe;

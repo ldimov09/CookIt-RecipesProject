@@ -29,11 +29,12 @@ async function register({ email, password, username }) {
     return token;
 }
 
-async function createSession({ _id, email, username }) {
+async function createSession({ _id, email, username, role }) {
     const payload = {
         _id,
         email, 
-        username
+        username,
+        role
     }
 
     const token = jwt.sign(payload, JST_SECRET);
