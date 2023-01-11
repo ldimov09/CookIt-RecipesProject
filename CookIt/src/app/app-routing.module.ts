@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth/logged.guard';
 import { LoginFormComponent } from './auth/login-form/login-form.component';
+import { NotloggedGuard } from './auth/not-logged.guard';
 import { RegisterFormComponent } from './auth/register-form/register-form.component';
 import { CreateRecipeComponent } from './recipes/create-recipe/create-recipe.component';
 
@@ -8,17 +10,12 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginFormComponent,
-    //canActivate: [NotloggedGuard] ToDo: not logged guard
+    canActivate:[NotloggedGuard]
   },
   {
     path: 'register',
     component: RegisterFormComponent,
-    //canActivate: [NotloggedGuard] ToDo: not logged guard
-  },
-  {
-    path: 'create',
-    component: CreateRecipeComponent,
-    //canActivate: [LoggedGurad] ToDo: Logged guard
+    canActivate:[NotloggedGuard]
   },
 ];
 
