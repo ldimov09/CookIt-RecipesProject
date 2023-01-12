@@ -10,12 +10,18 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginFormComponent,
-    canActivate:[NotloggedGuard]
+    canActivate: [NotloggedGuard]
   },
   {
     path: 'register',
     component: RegisterFormComponent,
-    canActivate:[NotloggedGuard]
+    canActivate: [NotloggedGuard]
+  },
+
+  {
+    path: 'create',
+    component: CreateRecipeComponent,
+    canActivate: [AuthGuard]
   },
 ];
 
@@ -23,4 +29,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

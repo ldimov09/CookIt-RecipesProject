@@ -5,11 +5,13 @@ const recipeSchema = new Schema({
     tags: [{ type: Types.ObjectId, ref: 'Tags', default: []}],
     imageUrl: {type: String, required: true},
     title: {type: String, required: true},
-    ingredients: [{type: Types.ObjectId, ref: 'Ingredients', default: [] }],
+    ingredients: [{type: Types.ObjectId, ref: 'Ingredients', default: [], required: true }],
     description: {type: String, required: true},
     comments: [{type: Types.ObjectId, ref: 'Comments', default: []}],
     likes: [{ type: Types.ObjectId, ref: 'Users', default: [] }],
     dislikes: [{ type: Types.ObjectId, ref: 'Users', default: [] }],
+    cookTime: { type: String, required: true},
+    servings: { type: Number, required: true}
 });
 
 

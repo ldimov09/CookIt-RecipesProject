@@ -1,6 +1,7 @@
 <section class="centered">
     <h3>Create your recipe here</h3>
     <form [formGroup]="form" (ngSubmit)="handleCreate(form)">
+        <div class="tag-selection" *ngFor="let tag of keys" (click)="toggleTag(tag)" [ngClass]="this.allTags[tag].checked == true? 'tag-selected': '' ">{{tag}}</div>
         <div class="form-floating mb-2">
             <input formControlName="title" type="text" class="form-control" id="floatingPassword" placeholder="Title">
             <label for="floatingPassword">Title</label>
@@ -21,6 +22,9 @@
             <textarea class="form-control" formControlName="tags" placeholder="Tags" id="floatingTextarea2" style="height: 100px"></textarea>
             <label for="floatingTextarea2">Tags (temp textarea)</label>
         </div>
-        <button type="submit" [disabled]="form.invalid" class="btn btn-success">Create</button>
+        <button type="submit" [disabled]="form.invalid" class="btn btn-warning">Create</button>
     </form>
+
+
+
 </section>
