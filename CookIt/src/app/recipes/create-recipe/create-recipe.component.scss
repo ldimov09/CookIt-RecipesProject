@@ -29,3 +29,18 @@ h3 {
   background-color: #f8da80;
   cursor: pointer; 
 }
+
+.plus_btn{
+  padding: 4px 9px;
+  padding-top: 0px;
+  display: inline-block;
+  border-radius:21px;
+  border: 1px solid black;
+  background-color: #ffc107;
+  font-size: 18px;
+  margin-left: 2px;
+}
+.plus_btn:hover {
+  background-color: #f8da80;
+  cursor: pointer; 
+}

@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { ThisReceiver } from '@angular/compiler';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
+import { ITag } from 'src/app/interfaces/tag';
 import { RecipeService } from '../recipe.service';
 
 @Component({
@@ -9,10 +11,17 @@ import { RecipeService } from '../recipe.service';
 	templateUrl: './create-recipe.component.html',
 	styleUrls: ['./create-recipe.component.scss']
 })
-export class CreateRecipeComponent {
+export class CreateRecipeComponent implements OnInit {
 
-	allTags: any = {
-		'Healthy': { checked: false, incompatible: ['Fried', 'Deep Fried', 'Junk Food'] },
+	allTagsTemp!: any;
+
+	allTags: any = {};
+
+	keys: any;
+
+	/*
+
+	'Healthy': { checked: false, incompatible: ['Fried', 'Deep Fried', 'Junk Food'] },
 		'Vegan': { checked: false, incompatible: ['Meat', 'Vegetarian', 'Fish'] },
 		'Healthy Smoothie': { checked: false, incompatible: ['Junk Food', 'Fried', 'Deep Fried'] },
 		'Vegetarian': { checked: false, incompatible: ['Meat', 'Vegan'] },
@@ -23,6 +32,7 @@ export class CreateRecipeComponent {
 		'Diary Free': { checked: false, incompatible: [] },
 		'Gluten Free': { checked: false, incompatible: [] },
 		'Salad': { checked: false, incompatible: [] },
+		'Soup': { checked: false, incompatible: [] },
 		'Dressing': { checked: false, incompatible: [] },
 		'BBQ': { checked: false, incompatible: ['Healthy', 'Healthy Smoothie'] },
 		'Pasta': { checked: false, incompatible: [] },
@@ -52,11 +62,11 @@ export class CreateRecipeComponent {
 		'Easy': { checked: false, incompatible: ['Basic', 'Advanced', 'For Chefs'] },
 		'Advanced': { checked: false, incompatible: ['Easy', 'Basic', 'For Chefs'] },
 		'For Chefs': { checked: false, incompatible: ['Easy', 'Basic', 'Advanced'] },
-	}
 
-	keys = Object.keys(this.allTags);
 
-	// ^^^ This thing up here is temporary. It will be removed later. ^^^
+	*/
+
+	// ^^^ This monstrosity up here is temporary. It will be removed later. ^^^
 
 
 	constructor(private service: AuthService, private recipeService: RecipeService, private router: Router) { }
@@ -68,6 +78,29 @@ export class CreateRecipeComponent {
 		ingredients: new FormControl('', [Validators.required]),
 		imageUrl: new FormControl('', [Validators.required]),
 	});
+
+	ngOnInit() {
+		this.recipeService.getAllTags()
+			.subscribe({
+				next: (allTags) => {
+					this.allTagsTemp = allTags;
+					this.allTagsTemp.result.map((tag: ITag) => {
+						this.allTags[tag.name!] = {
+							checked: false,
+							incompatible: tag.incompatible
+						}
+					})
+					console.log(this.allTags);
+					this.keys = Object.keys(this.allTags);
+				},
+				error: (error) => {
+					console.log(error);
+				}
+			})
+
+
+
+	}
 
 	handleCreate(form: FormGroup) {
 		const selectedTags = []
@@ -101,7 +134,7 @@ export class CreateRecipeComponent {
 		const tagObj = this.allTags[tag];
 
 		tagObj.checked = !tagObj.checked;
-		console.log(tagObj.checked);
+
 
 		for (tag of tagObj.incompatible) {
 			if (this.allTags[tag].checked) {
