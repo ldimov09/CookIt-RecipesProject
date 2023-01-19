@@ -14,10 +14,13 @@ import { RecipeService } from '../recipe.service';
 export class CreateRecipeComponent implements OnInit {
 
 	allTagsTemp!: any;
-
 	allTags: any = {};
-
+	allTagsShowin: any = {};
+	allTagsShowingKeys: string[] = [];
 	keys: any;
+	selectedTagsKeys: string[] = [];
+
+	showTagMenu = false;
 
 	/*
 
@@ -90,8 +93,10 @@ export class CreateRecipeComponent implements OnInit {
 							incompatible: tag.incompatible
 						}
 					})
+					this.allTagsShowin = this.allTags;
 					console.log(this.allTags);
 					this.keys = Object.keys(this.allTags);
+					this.allTagsShowingKeys = Object.keys(this.allTagsShowin);
 				},
 				error: (error) => {
 					console.log(error);
@@ -141,6 +146,32 @@ export class CreateRecipeComponent implements OnInit {
 				this.allTags[tag].checked = false;
 			}
 		}
+
+		this.selectedTagsKeys = []
+
+		for (let key in this.allTags) {
+			if (this.allTags[key].checked) {
+				this.selectedTagsKeys.push(key);
+			}
+		}
+		this.allTagsShowin = {}
+		for (let key in this.allTags) {
+			if (!this.allTags[key].checked) {
+				this.allTagsShowin[key] = this.allTags[key];
+			}
+		}
+		this.allTagsShowingKeys = Object.keys(this.allTagsShowin);
+		this.showTagMenu = false
+
+		
 	}
+
+	toggleTagMenu() {
+
+		this.showTagMenu = !this.showTagMenu;
+
+	}
+
+
 }
 

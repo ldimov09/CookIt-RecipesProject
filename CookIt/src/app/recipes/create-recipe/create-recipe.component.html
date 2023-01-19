@@ -1,8 +1,17 @@
 <section class="centered">
     <h3>Create your recipe here</h3>
     <form [formGroup]="form" (ngSubmit)="handleCreate(form)">
-        <div class="tag-selection" *ngFor="let tag of keys" (click)="toggleTag(tag)" [ngClass]="this.allTags[tag].checked == true? 'tag-selected': '' ">{{tag}}</div>
-        <button class="plus_btn">+</button>
+
+        <div>
+            <div class="tag-selection" *ngFor="let tag of selectedTagsKeys" (click)="toggleTag(tag)" >{{tag}}</div>
+            <div class="plus_btn" (click)="toggleTagMenu()">+</div>
+        </div>
+        
+        <ng-container *ngIf="showTagMenu">
+            <h4>Choose Tag: </h4>
+            <div class="tag-selection" *ngFor="let tag of allTagsShowingKeys" (click)="toggleTag(tag)" >{{tag}}</div>
+        </ng-container>
+
         <div class="form-floating mb-2">
             <input formControlName="title" type="text" class="form-control" id="floatingPassword" placeholder="Title">
             <label for="floatingPassword">Title</label>
