@@ -16,17 +16,45 @@
             <input formControlName="title" type="text" class="form-control" id="floatingPassword" placeholder="Title">
             <label for="floatingPassword">Title</label>
         </div>
+        <div *ngIf="title?.touched && title?.invalid" class="alert alert-danger">
+            <div *ngIf="title?.errors?.['required']">Title is required.</div>
+        </div>
         <div class="form-floating mb-2"> <!-- HUGE TODO add Ingredient system-->
             <textarea class="form-control" formControlName="ingredients" placeholder="Ingredients" id="floatingTextarea2" style="height: 100px"></textarea>
             <label for="floatingTextarea2">Ingredients (temp textarea)</label>
+        </div>
+        <div *ngIf="ingredients?.touched && ingredients?.invalid" class="alert alert-danger">
+            <div *ngIf="ingredients?.errors?.['required']">Ingredients are required.</div>
         </div>
         <div class="form-floating mb-2">
             <textarea class="form-control" formControlName="description" placeholder="Instructions" id="floatingTextarea2" style="height: 100px"></textarea>
             <label for="floatingTextarea2">Instructions</label>
         </div>
+        <div *ngIf="description?.touched && description?.invalid" class="alert alert-danger">
+            <div *ngIf="description?.errors?.['required']">Description is required.</div>
+        </div>
         <div class="form-floating mb-2">
             <input formControlName="imageUrl" type="text" class="form-control" id="floatingPassword" placeholder="Title">
-            <label for="floatingPassword">Image Url</label>
+            <label for="floatingPassword">Image Link</label>
+        </div>
+        <div *ngIf="imageUrl?.touched && imageUrl?.invalid" class="alert alert-danger">
+            <div *ngIf="imageUrl?.errors?.['required']">Image Link is required.</div>
+        </div>
+        <div class="form-floating mb-2">
+            <input formControlName="cookTime" type="text" class="form-control" id="floatingPassword" placeholder="Title">
+            <label for="floatingPassword">Cook Time</label>
+        </div>
+        <div *ngIf="cookTime?.touched && cookTime?.invalid" class="alert alert-danger">
+            <div *ngIf="cookTime?.errors?.['required']">Cook Time is required.</div>
+        </div>
+        <div class="form-floating mb-2">
+            <input formControlName="servings" type="number" min="1" class="form-control" id="floatingPassword" placeholder="Title">
+            <label for="floatingPassword">Servings</label>
+        </div>
+        <div *ngIf="servings?.touched && servings?.invalid" class="alert alert-danger">
+            <div *ngIf="servings?.errors?.['min']">Servings have to be at least 1 portion.</div>
+
+            <div *ngIf="servings?.errors?.['required']">Servings are required.</div>
         </div>
         <div class="form-floating mb-2">
             <textarea class="form-control" formControlName="tags" placeholder="Tags" id="floatingTextarea2" style="height: 100px"></textarea>

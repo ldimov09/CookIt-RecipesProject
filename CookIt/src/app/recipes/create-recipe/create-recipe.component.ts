@@ -76,11 +76,31 @@ export class CreateRecipeComponent implements OnInit {
 
 	form = new FormGroup({
 		title: new FormControl('', [Validators.required]),
-		tags: new FormControl('', [Validators.required]),
+		//TODO: ask the second developer what is this tags: new FormControl('', [Validators.required]),
 		description: new FormControl('', [Validators.required]),
 		ingredients: new FormControl('', [Validators.required]),
 		imageUrl: new FormControl('', [Validators.required]),
+		servings:new FormControl('', [Validators.required]),
+		cookTime: new FormControl('', [Validators.required]),
 	});
+	get title(){
+		return this.form.get('title')
+	}
+	get description(){
+		return this.form.get('description')
+	}
+	get ingredients(){
+		return this.form.get('ingredients')
+	}
+	get imageUrl(){
+		return this.form.get('imageUrl')
+	}
+	get servings(){
+		return this.form.get('servings')
+	}
+	get cookTime(){
+		return this.form.get('cookTime')
+	}
 
 	ngOnInit() {
 		this.recipeService.getAllTags()
@@ -120,7 +140,10 @@ export class CreateRecipeComponent implements OnInit {
 			description: this.form.value.description!,
 			tags: selectedTags,
 			ingredients: [this.form.value.ingredients!],
-			imageUrl: this.form.value.imageUrl!
+			imageUrl: this.form.value.imageUrl!,
+			cookTime:this.form.value.cookTime,
+			servings:this.form.value.servings
+
 		};
 		this.recipeService.createRecipe(formValue)
 			.subscribe({
