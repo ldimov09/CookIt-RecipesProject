@@ -36,6 +36,10 @@ nav {
     width: 1.5rem;
 }
 
+.hamburger{
+    cursor: pointer;
+}
+
 @media (max-width: 400px) {
     .title{
         margin-left: 20%;

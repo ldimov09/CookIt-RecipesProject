@@ -2,10 +2,10 @@ const { Types, Schema, model } = require("mongoose");
 
 const recipeSchema = new Schema({
     owner: {type: Types.ObjectId, ref: 'Users', required: true},
-    tags: [{ type: Types.ObjectId, ref: 'Tags', default: []}],
+    tags: [{ type: String,  default: []}],
     imageUrl: {type: String, required: true},
     title: {type: String, required: true},
-    ingredients: [{type: /*TODO: Types.ObjectId!*/ String, ref: 'Ingredients', default: [], required: true }],
+    ingredients: [{type:  String, default: [], required: true }],
     description: {type: String, required: true},
     comments: [{type: Types.ObjectId, ref: 'Comments', default: []}],
     likes: [{ type: Types.ObjectId, ref: 'Users', default: [] }],

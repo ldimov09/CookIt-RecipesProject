@@ -1,0 +1,362 @@
+[{
+  "_id": {
+    "$oid": "63c5aad539d4f4a790b1f16b"
+  },
+  "name": "Healthy",
+  "incompatible": [
+    "Fried",
+    "Deep Fried",
+    "Junk Food"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ab0f39d4f4a790b1f16d"
+  },
+  "name": "Vegan",
+  "incompatible": [
+    "Meat",
+    "Vegetarian",
+    "Fish"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ab1c39d4f4a790b1f16f"
+  },
+  "name": "Healthy Smoothie",
+  "incompatible": [
+    "Junk Food",
+    "Fried",
+    "Deep Fried"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ab8839d4f4a790b1f171"
+  },
+  "name": "Vegetarian",
+  "incompatible": [
+    "Meat",
+    "Vegan"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ab9539d4f4a790b1f173"
+  },
+  "name": "Fruit Smoothie",
+  "incompatible": [
+    "Juice",
+    "Coffee"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5aba039d4f4a790b1f175"
+  },
+  "name": "Fruit Salad",
+  "incompatible": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5aba739d4f4a790b1f177"
+  },
+  "name": "High Protein",
+  "incompatible": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5abb339d4f4a790b1f179"
+  },
+  "name": "Sugar Free",
+  "incompatible": [
+    "Sweet",
+    "Cake"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5abfe39d4f4a790b1f17b"
+  },
+  "name": "Diary Free",
+  "incompatible": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ac0339d4f4a790b1f17d"
+  },
+  "name": "Gluten Free",
+  "incompatible": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ac0839d4f4a790b1f17f"
+  },
+  "name": "Salad",
+  "incompatible": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ac0d39d4f4a790b1f181"
+  },
+  "name": "Soup",
+  "incompatible": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ac1139d4f4a790b1f183"
+  },
+  "name": "Dressing",
+  "incompatible": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ac3039d4f4a790b1f185"
+  },
+  "name": "BBQ",
+  "incompatible": [
+    "Healthy",
+    "Healthy Smoothie"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ac3f39d4f4a790b1f187"
+  },
+  "name": "Pasta",
+  "incompatible": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ac4839d4f4a790b1f189"
+  },
+  "name": "Junk Food",
+  "incompatible": [
+    "Healthy",
+    "Healthy Smoothie"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ac5839d4f4a790b1f18b"
+  },
+  "name": "Meat",
+  "incompatible": [
+    "Vegan",
+    "Vegetarian"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ac6039d4f4a790b1f18d"
+  },
+  "name": "Dessert",
+  "incompatible": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ac6539d4f4a790b1f18f"
+  },
+  "name": "Pizza",
+  "incompatible": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ac6b39d4f4a790b1f191"
+  },
+  "name": "Kid's Meal",
+  "incompatible": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ac7539d4f4a790b1f193"
+  },
+  "name": "Sweet",
+  "incompatible": [
+    "Sugar Free"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ac7e39d4f4a790b1f195"
+  },
+  "name": "Quick",
+  "incompatible": [
+    "Time-consuming"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ac8a39d4f4a790b1f197"
+  },
+  "name": "Cake",
+  "incompatible": [
+    "Sugar Free"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ac9639d4f4a790b1f199"
+  },
+  "name": "Microwave",
+  "incompatible": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5aca239d4f4a790b1f19b"
+  },
+  "name": "Time-consuming",
+  "incompatible": [
+    "Quick"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5acad39d4f4a790b1f19d"
+  },
+  "name": "Hot Drink",
+  "incompatible": [
+    "Cold Drink"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5acc039d4f4a790b1f19f"
+  },
+  "name": "Cold Drink",
+  "incompatible": [
+    "Hot Drink"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5acd539d4f4a790b1f1a1"
+  },
+  "name": "Juice",
+  "incompatible": [
+    "Fruit Smoothie",
+    "Coffee"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ace339d4f4a790b1f1a3"
+  },
+  "name": "Deep Fried",
+  "incompatible": [
+    "Fried",
+    "Healthy",
+    "Healthy Smoothie"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5acea39d4f4a790b1f1a5"
+  },
+  "name": "Baked",
+  "incompatible": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ad1939d4f4a790b1f1a9"
+  },
+  "name": "Boiled",
+  "incompatible": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ad1e39d4f4a790b1f1ab"
+  },
+  "name": "Stewed",
+  "incompatible": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ad2239d4f4a790b1f1ad"
+  },
+  "name": "Smoked",
+  "incompatible": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ad2739d4f4a790b1f1af"
+  },
+  "name": "Cookies",
+  "incompatible": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ad3139d4f4a790b1f1b1"
+  },
+  "name": "Fish",
+  "incompatible": [
+    "Vegan"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ad3b39d4f4a790b1f1b3"
+  },
+  "name": "Basic",
+  "incompatible": [
+    "Easy",
+    "Advanced",
+    "For Chefs"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ad4539d4f4a790b1f1b5"
+  },
+  "name": "Easy",
+  "incompatible": [
+    "Basic",
+    "Advanced",
+    "For Chefs"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ad5039d4f4a790b1f1b7"
+  },
+  "name": "Advanced",
+  "incompatible": [
+    "Easy",
+    "Basic",
+    "For Chefs"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5ad5c39d4f4a790b1f1b9"
+  },
+  "name": "For Chefs",
+  "incompatible": [
+    "Easy",
+    "Basic",
+    "Advanced"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5b3f74c2ece295284566f"
+  },
+  "name": "Coffee",
+  "incompatible": [
+    "Juice",
+    "Fruit Smoothie"
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63c5b40a4c2ece2952845671"
+  },
+  "name": "Fried",
+  "incompatible": [
+    "Deep Fried",
+    "Healthy",
+    "Healthy Smoothie"
+  ],
+  "__v": 0
+}]

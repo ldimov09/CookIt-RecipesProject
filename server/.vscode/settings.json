@@ -1,0 +1,7 @@
+{
+    "editor.tokenColorCustomizations": {
+        "[Monokai Dimmed]": {
+            "types": "#4ec9b0"
+        },
+    }
+}

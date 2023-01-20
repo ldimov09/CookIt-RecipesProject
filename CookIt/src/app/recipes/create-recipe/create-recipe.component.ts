@@ -20,6 +20,8 @@ export class CreateRecipeComponent implements OnInit {
 	keys: any;
 	selectedTagsKeys: string[] = [];
 
+	recipeIngredients: string[] = [];
+
 	showTagMenu = false;
 
 	/*
@@ -76,9 +78,7 @@ export class CreateRecipeComponent implements OnInit {
 
 	form = new FormGroup({
 		title: new FormControl('', [Validators.required]),
-		//TODO: ask the second developer what is this tags: new FormControl('', [Validators.required]),
 		description: new FormControl('', [Validators.required]),
-		ingredients: new FormControl('', [Validators.required]),
 		imageUrl: new FormControl('', [Validators.required]),
 		servings:new FormControl('', [Validators.required]),
 		cookTime: new FormControl('', [Validators.required]),
@@ -88,9 +88,6 @@ export class CreateRecipeComponent implements OnInit {
 	}
 	get description(){
 		return this.form.get('description')
-	}
-	get ingredients(){
-		return this.form.get('ingredients')
 	}
 	get imageUrl(){
 		return this.form.get('imageUrl')
@@ -139,7 +136,7 @@ export class CreateRecipeComponent implements OnInit {
 			title: this.form.value.title!,
 			description: this.form.value.description!,
 			tags: selectedTags,
-			ingredients: [this.form.value.ingredients!],
+			ingredients: this.recipeIngredients!,
 			imageUrl: this.form.value.imageUrl!,
 			cookTime:this.form.value.cookTime,
 			servings:this.form.value.servings
@@ -186,6 +183,8 @@ export class CreateRecipeComponent implements OnInit {
 		this.allTagsShowingKeys = Object.keys(this.allTagsShowin);
 		this.showTagMenu = false
 
+	
+
 		
 	}
 
@@ -193,6 +192,13 @@ export class CreateRecipeComponent implements OnInit {
 
 		this.showTagMenu = !this.showTagMenu;
 
+	}
+
+	addIngredient(ingInp: HTMLInputElement) {
+		this.recipeIngredients.push(ingInp.value);
+	}
+	removeIng(ing: string) {
+		this.recipeIngredients.splice(this.recipeIngredients.indexOf(ing), 1);
 	}
 
 
