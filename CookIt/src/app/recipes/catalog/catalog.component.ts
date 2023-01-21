@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { IRecipe } from 'src/app/interfaces/recipe';
 import { RecipeService } from '../recipe.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { RecipeService } from '../recipe.service';
   styleUrls: ['./catalog.component.scss'],
 })
 export class CatalogComponent implements OnInit {
-  recipes!: any;
+  recipes!: IRecipe[];
   arr: any = [];
   constructor(private recipeSurvice: RecipeService, router: Router) {}
   ngOnInit() {
