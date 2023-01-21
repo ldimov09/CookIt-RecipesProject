@@ -8,25 +8,22 @@ import { RecipeService } from '../recipe.service';
   styleUrls: ['./catalog.component.scss'],
 })
 export class CatalogComponent implements OnInit {
-   recipes!:any
-   arr:any=[]
+  recipes!: any;
+  arr: any = [];
   constructor(private recipeSurvice: RecipeService, router: Router) {}
   ngOnInit() {
     this.recipeSurvice.getAllRecipes().subscribe({
-    next:(value:any)=>{
-      this.recipes= value.result;
-      for (const recipe of this.recipes) {
-        for (let i = 1; i <= recipe.servings; i++) {
-          this.arr.push(i)
-         
+      next: (value: any) => {
+        this.recipes = value.result;
+        for (const recipe of this.recipes) {
+          for (let i = 1; i <= recipe.servings; i++) {
+            this.arr.push(i);
+          }
+          recipe.servings = this.arr;
+          this.arr = [];
         }
-        recipe.servings=this.arr
-        this.arr=[]
-      }
-console.log(this.recipes);
-
-    }
-   })
-   
+        console.log(this.recipes);
+      },
+    });
   }
 }
