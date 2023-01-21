@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
@@ -10,6 +10,10 @@ import { RecipeService } from '../recipe.service';
   styleUrls: ['./tag-create-form.component.scss']
 })
 export class TagCreateFormComponent {
+
+  @Output() newErrorEvent = new EventEmitter<string>();
+
+  errorMessage!: string;
 
   constructor(private service: AuthService, private recipeService: RecipeService, private router: Router) { }
 
@@ -34,14 +38,21 @@ export class TagCreateFormComponent {
       .subscribe({
         next: (response) => {
           console.log(response);
+          if(!response.success){
+            this.emitError(response.error)
+          }
         },
         error: (error) => {
-          console.log(error);
+          this.emitError(error);
         }
       })
     
 
     
+  }
+
+  emitError(error: string) {
+    this.newErrorEvent.emit(error);
   }
   
 }

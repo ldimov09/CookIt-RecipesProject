@@ -22,10 +22,13 @@ export class RecipeService {
   }
 
   createTag(tag: ITag){
-    return this.http.post<any>(this.url + 'api/tag/create', tag)
+    //return this.http.post<any>(this.url + 'api/tag/create', tag)
+    return this.http.post<any>('https://www.digitalplant.eu/recipes/api/tags/create.php', tag)
   }
 
   getAllTags() {
-    return this.http.get<any>(this.url + 'api/tags');
+    //return this.http.get<any>(this.url + 'api/tags');
+    return this.http.get<any>("https://www.digitalplant.eu/recipes/api/tags/all.php");
+
   }
 }

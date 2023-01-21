@@ -1,0 +1,181 @@
+Recipe: 
+	id: id
+	owner: userId,
+	tags: string[],
+	imageUrl: string,
+	title: string,
+	ingredients: string[],
+	description: string,
+	comments*: commentId,
+	likes*: userId[],
+	dislikes*: userId[],
+	cookTime: string,
+	servings: number,
+
+Tag:
+	id: id,
+	name: string,
+	incompatible*: string[],
+
+User:
+	id: id,
+	role: string, ('user', 'admin' or 'superadmin')
+	email: string, (unique, used for login)
+	hashedPassword: string, (hashed with bcrypt)
+	username: string, (NOT unique)
+	myRecipes*: recipeId[],
+	reports: number
+
+Comment: 
+	id: id
+	message: string,
+	userId: userId
+	
+Properties with * are not required
+	
+
+
+
+Requests and responses:
+
+NOTE: If success = false instead of result there is error with the message of the error (string)
+
+[NoA] - not authorized
+[A] - authorized request,
+[AA] - authorized as admin,
+[ASA] - authorized superadmin,
+
+Get all recipes [Noa]
+req: url: '/api/recipes'
+res: {
+	success: true,
+	result: <all recipes in table Recipes>
+}	
+
+Create Recipe [A]
+req: url: '/api/recipes/create', body: { recipe }
+res: {
+	success: true, 
+	result: <created recipe>
+}
+
+Delete recipe [A]: 
+req: url: '/api/recipes/delete', body: { recipeId }
+res: {
+    success: true,
+    result: {}
+}
+
+Edit recipe [A] :
+req: url: '/api/recipes/edit', body: { recipeId, newRecipe }
+res: {
+    success: true,
+    result: <upadted recipe>
+}
+
+Like recipe [A] :
+req: url: '/api/recipes/like', body: { recipeId, userId }
+res: {
+    success: true,
+    result: <updated recipe>
+}
+
+Dislike recipe [A] :
+req: url: '/api/recipes/dislike', body: { recipeId, userId }
+res: {
+    success: true,
+    result: <updated recipe>
+}
+
+Add recipe to myRecipes [A] :
+req: url: '/api/recipes/addToMyRecipes', body: { userId, recipeId }
+res: {
+    success: true,
+    result: <updated user>
+}
+
+Add comment [A]:
+req: url: '/api/recipes/addComment', body: { recipeId, commentMessage, userId }
+res: {
+    success: true
+    result: <created comment>
+}
+
+Delete comment [AA]:
+req: url: '/api/recipes/deleteComment', body: { commentId }
+res: {
+    success: true,
+    result: {}
+}
+
+Get all tags [A]
+req: url: '/api/tags'
+res: {
+	success: true,
+	result: <all tags in table Tags>
+}
+
+Create tag [AA]
+req: url: '/api/tag/create', body: { tag }
+res: {
+	success: true,
+	result: <created tag>
+}
+
+Delete tag [AA]:
+req: url: '/api/tag/delete', body: { tagId }
+res: {
+    success: true,
+    result: {}
+}
+
+Edit tag [AA]:
+req: url: '/api/tag/edit', body: { tagId, newTag }
+res: {
+    success: true,
+    result: <updated tag>
+}
+
+===========users===============
+
+Login [NoA]
+req: url: '/api/auth/login', body: { email, password }
+res: {
+    success: true,
+    result: <JWT token>
+}
+
+NOTE: If the email or password is invalid:  error = 'Incorrect email or password!' 
+
+
+Register [NoA]
+req: url: '/api/auth/register', body: { email, password, username }
+res: {
+    success: true,
+    result: <JWT token>
+}
+
+NOTE: If the email is taken:  error = 'Email taken!' 
+
+
+Get all Users [AA]
+req: url: '/api/auth/users'
+res: {
+    success: true,
+    result: <all users in table Users>
+}
+
+Change user Role [ASA]
+req: url: '/api/auth/users/editRole', body: { newRole, userId }
+res: {
+    success: true,
+    result: <all users in table Users>
+}
+
+Delete user [AA]:
+req: url: '/api/auth/users/delete', body: { userId }
+res: {
+    success: true,
+    result: {}
+}
+

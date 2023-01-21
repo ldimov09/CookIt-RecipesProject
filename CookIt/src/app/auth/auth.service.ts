@@ -19,16 +19,23 @@ export class AuthService {
   }
 
   loginUser(payload: { email: string; password: string }) {
-    return this.http.post(this.url + 'login', payload);
+    //return this.http.post(this.url + 'login', payload);
+    return this.http.post("https://www.digitalplant.eu/recipes/api/auth/login.php", payload);
+
   }
 
   createUser(payload: {username:string, email: string; password: string }) {
-    return this.http.post(this.url + 'register', payload);
+    //return this.http.post(this.url + 'register', payload);
+    return this.http.post("https://www.digitalplant.eu/recipes/api/auth/register.php", payload);
   }
 
   isLoggedIn(){
     const token = localStorage.getItem('token');
     if (!token) return false;
     return true;
+  }
+
+  getAllUsers() {
+    return this.http.get(this.url + "users");
   }
 }

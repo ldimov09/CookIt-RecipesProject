@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoginFormComponent } from './auth/login-form/login-form.component';
 import { RegisterFormComponent } from './auth/register-form/register-form.component';
+import { TagCreateFormComponent } from './recipes/tag-create-form/tag-create-form.component';
 
 @Component({
   selector: 'app-root',
@@ -26,8 +27,8 @@ export class AppComponent {
   showWarning: boolean = false;
 
   subscribeToEventEmitter(elementRef: any) {
-    if(elementRef instanceof RegisterFormComponent || elementRef instanceof LoginFormComponent){
-      const child: LoginFormComponent | RegisterFormComponent  = elementRef;
+    if(elementRef instanceof RegisterFormComponent || elementRef instanceof LoginFormComponent || elementRef instanceof TagCreateFormComponent){
+      const child: LoginFormComponent | RegisterFormComponent | TagCreateFormComponent  = elementRef;
       
       child.newErrorEvent.subscribe((response) => {
         this.error = response;

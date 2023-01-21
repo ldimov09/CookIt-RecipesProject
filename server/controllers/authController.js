@@ -1,5 +1,6 @@
 const authController = require('express').Router();
-const { login, register, getAllUsers } = require('../services/authService.js')
+const { get } = require('mongoose');
+const { login, register, getAllUsers, verifyToken } = require('../services/authService.js')
 
 authController.post('/login', async (req, res) => {
     try {
@@ -56,6 +57,14 @@ authController.get('/users', async (req, res) => {
             success: true,
             error: err.message,
         });
+    }
+})
+
+authController.get('/verify/:token', async (req, res) => {
+    try{
+        res.send(verifyToken(req.params.token));
+    }catch(err) {
+        res.send('Error' + err.message)
     }
 })
 

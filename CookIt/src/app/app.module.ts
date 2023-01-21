@@ -10,12 +10,14 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { RecipeService } from './recipes/recipe.service';
 import { RecipesModule } from './recipes/recipes.module';
 import { TagCreateFormComponent } from './recipes/tag-create-form/tag-create-form.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     TagCreateFormComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,

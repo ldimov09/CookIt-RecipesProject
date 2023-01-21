@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminComponent } from './admin/admin.component';
 import { AuthGuard } from './auth/logged.guard';
 import { LoginFormComponent } from './auth/login-form/login-form.component';
 import { NotloggedGuard } from './auth/not-logged.guard';
@@ -28,7 +29,7 @@ const routes: Routes = [
 
   {
     path: 'admin',
-    component: TagCreateFormComponent,
+    component: AdminComponent,
     canActivate: [AuthGuard]
   },
 

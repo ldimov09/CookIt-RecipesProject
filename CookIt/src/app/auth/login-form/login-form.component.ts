@@ -37,17 +37,16 @@ export class LoginFormComponent {
       next: (response: any) => {
         console.log(response);
         if (!response.success) {
-          this.message = response.message;
+          this.message = response.error;
           this.success = response.success
 
-          this.emitError(response.message);
+          this.emitError(response.error);
 
         } else {
           console.log('Login successful', response.result); // Warning! Console.log! Remove later!
           const token = response.result;
           localStorage.setItem('token', token);
           this.router.navigate(['/']);
-
         }
       },
     });
