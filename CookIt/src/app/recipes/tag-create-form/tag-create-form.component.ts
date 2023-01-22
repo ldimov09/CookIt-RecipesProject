@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
@@ -24,7 +24,7 @@ export class TagCreateFormComponent {
 
   handleSubmit(form: FormGroup) {
 
-    const incompatibleArray = JSON.parse(this.form.value.incompatible!.replaceAll('\'', '"'));
+    const incompatibleArray = this.form.value.incompatible!.split(', ');
 
     const formValue = {
       name: this.form.value.name!,

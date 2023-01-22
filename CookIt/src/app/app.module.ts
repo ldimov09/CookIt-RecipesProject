@@ -11,12 +11,15 @@ import { RecipeService } from './recipes/recipe.service';
 import { RecipesModule } from './recipes/recipes.module';
 import { TagCreateFormComponent } from './recipes/tag-create-form/tag-create-form.component';
 import { AdminComponent } from './admin/admin.component';
+import { TagEditFormComponent } from './recipes/tag-edit-form/tag-edit-form.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     TagCreateFormComponent,
+    TagEditFormComponent,
     AdminComponent,
   ],
   imports: [

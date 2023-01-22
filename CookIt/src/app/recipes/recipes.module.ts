@@ -4,13 +4,15 @@ import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { CatalogComponent } from './catalog/catalog.component';
+import { TagEditFormComponent } from './tag-edit-form/tag-edit-form.component';
+import { TagCreateFormComponent } from './tag-create-form/tag-create-form.component';
 
 
 
 @NgModule({
   declarations: [
     CreateRecipeComponent,
-    CatalogComponent
+    CatalogComponent,
   ],
   imports: [
     CommonModule,

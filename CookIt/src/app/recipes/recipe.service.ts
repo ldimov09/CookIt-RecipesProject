@@ -29,6 +29,13 @@ export class RecipeService {
   getAllTags() {
     //return this.http.get<any>(this.url + 'api/tags');
     return this.http.get<any>("https://www.digitalplant.eu/recipes/api/tags/all.php");
+  }
 
+  editTag(tag: ITag){
+    return this.http.post<any>("https://www.digitalplant.eu/recipes/api/tags/edit.php", tag);
+  }
+
+  deleteTag(tag: ITag){
+    return this.http.post<any>("https://www.digitalplant.eu/recipes/api/tags/delete.php", { id: tag.id});
   }
 }
