@@ -45,7 +45,8 @@ export class RegisterFormComponent {
 
   handleRegister(form: FormGroup) {
     const { username, email, password } = form.value;
-    this.service.createUser({ username, email, password }).subscribe({
+   
+    this.service.createUser({ username, email, password, }).subscribe({
       next: (response: any) => {
         if (!response.success) {
           console.log(response)
