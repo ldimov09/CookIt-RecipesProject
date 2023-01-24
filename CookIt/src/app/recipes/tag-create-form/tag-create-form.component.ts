@@ -31,13 +31,10 @@ export class TagCreateFormComponent {
       incompatible: incompatibleArray,
     };
 
-    console.log(formValue);
-  
     
     this.recipeService.createTag(formValue)
       .subscribe({
         next: (response) => {
-          console.log(response);
           if(!response.success){
             this.emitError(response.error)
           }

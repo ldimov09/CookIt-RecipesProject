@@ -32,10 +32,8 @@ export class LoginFormComponent {
   }
 
   handleLogin(form: FormGroup) {
-    console.log(form.value);
     this.service.loginUser(form.value).subscribe({
       next: (response: any) => {
-        console.log(response);
         if (!response.success) {
           this.message = response.error;
           this.success = response.success
@@ -43,7 +41,6 @@ export class LoginFormComponent {
           this.emitError(response.error);
 
         } else {
-          console.log('Login successful', response.result); // Warning! Console.log! Remove later!
           const token = response.result;
           localStorage.setItem('token', token);
           this.router.navigate(['/']);

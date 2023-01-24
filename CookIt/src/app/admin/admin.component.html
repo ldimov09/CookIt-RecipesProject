@@ -2,8 +2,11 @@
 <h2>User List</h2>
 <ul class="list-group">
     <li class="list-group-item" *ngFor="let user of users"><span
-            [ngClass]="user.role == 'user'? 'badge bg-secondary': 'badge bg-warning'">{{user.role}}</span> -
-        {{user.email}} - {{user.username}}</li>
+            [ngClass]="user.role == 'user'? 'badge bg-secondary': user.role == 'admin'?'badge bg-warning': 'badge bg-primary'">{{user.role}}</span> -
+        {{user.email}} - {{user.username}}
+        <button *ngIf="user.role != 'superadmin'" class="btn  action-btn" [ngClass]="user.role == 'admin'? 'btn-danger': 'btn-success'" (click)="changeUserRole(user.id, user.role == 'admin'? 'user': 'admin')">{{user.role == "admin"? "Demote": "Promote"}}</button>
+    </li>
+
 </ul>
 
 <h2>Create Tag</h2>

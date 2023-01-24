@@ -15,7 +15,10 @@ export class AuthService {
     if (!token) return null;
 
     const helper = new JwtHelperService();
-    return helper.decodeToken(token);
+    const user = helper.decodeToken(token);
+
+
+    return user.data;
   }
 
   loginUser(payload: { email: string; password: string }) {
@@ -36,6 +39,11 @@ export class AuthService {
   }
 
   getAllUsers() {
-    return this.http.get(this.url + "users");
+    //return this.http.get(this.url + "users");
+    return this.http.get("https://www.digitalplant.eu/recipes/api/auth/all.php");
+  }
+
+  changeUserRole(userId: string, role: string) {
+    return this.http.post("https://www.digitalplant.eu/recipes/api/auth/editrole.php", { userId, newRole: role });
   }
 }

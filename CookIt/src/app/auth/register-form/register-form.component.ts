@@ -48,10 +48,8 @@ export class RegisterFormComponent {
     this.service.createUser({ username, email, password }).subscribe({
       next: (response: any) => {
         if (!response.success) {
-          console.log(response)
           this.emitError(response.error);
         } else {
-          console.log('Register successful', response.result); // Warning! Console.log! Remove later!
           const token = response.result;
           localStorage.setItem('token', token);
           this.router.navigate(['/']);

@@ -23,7 +23,6 @@ export class CatalogComponent implements OnInit {
           recipe.servings = this.arr;
           this.arr = [];
         }
-        console.log(this.recipes);
       },
     });
   }

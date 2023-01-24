@@ -39,7 +39,6 @@ export class AppComponent {
 
   unsubscribeFromEventEmitter() {
     if(this.subscription) {
-      console.log('unsubscribed from event');
       this.subscription.unsubscribe();
     }
   }

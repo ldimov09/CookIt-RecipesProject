@@ -41,10 +41,8 @@ export class TagEditFormComponent {
     this.recipeService.editTag(formValue)
     .subscribe({
       next: (response) => {
-        console.log(response);
       },
       error: (response) => {
-        console.log(response);
       }
     })
   }

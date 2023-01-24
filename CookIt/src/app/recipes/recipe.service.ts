@@ -17,8 +17,7 @@ export class RecipeService {
   }
 
   createRecipe(recipe: IRecipe){
-    console.log(recipe);
-    return this.http.post<any>(this.url + 'api/recipes/create', recipe);
+    return this.http.post<any>('https://www.digitalplant.eu/recipes/api/recipes/create.php', recipe);
   }
 
   createTag(tag: ITag){

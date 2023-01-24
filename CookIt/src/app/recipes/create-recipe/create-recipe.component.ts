@@ -106,12 +106,12 @@ export class CreateRecipeComponent implements OnInit {
 					this.allTagsTemp = allTags;
 					this.allTagsTemp.result.map((tag: ITag) => {
 						this.allTags[tag.name!] = {
+							id: tag.id,
 							checked: false,
 							incompatible: tag.incompatible
 						}
 					})
 					this.allTagsShowin = this.allTags;
-					console.log(this.allTags);
 					this.keys = Object.keys(this.allTags);
 					this.allTagsShowingKeys = Object.keys(this.allTagsShowin);
 				},
@@ -125,31 +125,34 @@ export class CreateRecipeComponent implements OnInit {
 	}
 
 	handleCreate(form: FormGroup) {
+
+
 		const selectedTags = []
 		for (let key in this.allTags) {
 			if (this.allTags[key].checked) {
-				selectedTags.push(key);
+				selectedTags.push(this.allTags[key].id);
 			}
 		}
 		const formValue = {
-			owner: this.service.user._id,
+			owner: this.service.user.id,
 			title: this.form.value.title!,
 			description: this.form.value.description!,
 			tags: selectedTags,
 			ingredients: this.recipeIngredients!,
-			imageUrl: this.form.value.imageUrl!,
+			imageurl: this.form.value.imageUrl!,
 			cookTime:this.form.value.cookTime,
 			servings:this.form.value.servings
 
 		};
+
+
+
 		this.recipeService.createRecipe(formValue)
 			.subscribe({
 
 				next: (response: any) => {
-					console.log(response); //Waring console.log! TODO: Remove this!
 				},
 				error: (err) => {
-					console.log('Subscribe', err); //Waring console.log! TODO: Remove this!
 				}
 			})
 	}
