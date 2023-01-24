@@ -17,7 +17,6 @@ export class AuthService {
     const helper = new JwtHelperService();
     const user = helper.decodeToken(token);
 
-
     return user.data;
   }
 
@@ -27,7 +26,7 @@ export class AuthService {
 
   }
 
-  createUser(payload: {username:string, email: string; password: string }) {
+  createUser(payload: {username:string, email: string; password: string, }) {
     //return this.http.post(this.url + 'register', payload);
     return this.http.post("https://www.digitalplant.eu/recipes/api/auth/register.php", payload);
   }
