@@ -22,11 +22,17 @@
         <ul id="nav-menu" class="list-unstyled align-items-center d-md-flex m-0 p-0">
 
 
-            <li class="my-2" *ngIf="!service.isLoggedIn()">
-                <a routerLink="/login" class="sign-up btn">Login</a>
+            <li class="my-2">
+                <a routerLink="/" class="sign-up btn">Home</a>
+            </li>
+            <li class="my-2">
+                <a routerLink="/" class="sign-up btn">About</a>
             </li>
             <li class="my-2">
                 <a routerLink="/recipes" class="sign-up btn">Recipes</a>
+            </li>
+            <li class="my-2" *ngIf="!service.isLoggedIn()">
+                <a routerLink="/login" class="sign-up btn">Login</a>
             </li>
             <li class="my-2" *ngIf="!service.isLoggedIn()">
                 <a routerLink="/register" class="sign-up btn btn-success ml-lg-3">Register</a>

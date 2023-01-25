@@ -3,7 +3,7 @@ const { Types, Schema, model } = require("mongoose");
 const recipeSchema = new Schema({
     owner: {type: Types.ObjectId, ref: 'Users', required: true},
     tags: [{ type: String,  default: []}],
-    imageUrl: {type: String, required: true},
+    imageurl: {type: String, required: true},
     title: {type: String, required: true},
     ingredients: [{type:  String, default: [], required: true }],
     description: {type: String, required: true},

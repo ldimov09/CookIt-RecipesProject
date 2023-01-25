@@ -1,18 +1,8 @@
-<section class="centered">
+<section class="centered mt-5">
     <h3>Create your recipe here</h3>
     <form [formGroup]="form" (ngSubmit)="handleCreate(form)">
 
-        <div>
-            <div class="tag-selection" *ngFor="let tag of selectedTagsKeys" (click)="toggleTag(tag)">{{tag}}</div>
-            <div class="plus_btn" (click)="toggleTagMenu()">+ Add Tag</div>
-        </div>
-
-        <ng-container *ngIf="showTagMenu">
-            <h4>Choose Tag: </h4>
-            <div class="tag-selection" *ngFor="let tag of allTagsShowingKeys" (click)="toggleTag(tag)">{{tag}}</div>
-        </ng-container>
-
-        <div class="form-floating mb-2">
+        <div class="form-floating mb-4">
             <input formControlName="title" type="text" class="form-control" id="floatingPassword" placeholder="Title">
             <label for="floatingPassword">Title</label>
         </div>
@@ -20,15 +10,26 @@
             <div *ngIf="title?.errors?.['required']">Title is required.</div>
         </div>
 
+        <div>
+            <div class="tag-selection" *ngFor="let tag of selectedTagsKeys" (click)="toggleTag(tag)">{{tag}}</div>
+            <div class="plus_btn mb-2" (click)="toggleTagMenu()">+ Add Tag</div>
+        </div>
 
-        <div class="form-floating mb-2">
+        <div *ngIf="showTagMenu" class="mb-2">
+            <h4>Choose Tag: </h4>
+            <div class="tag-selection" *ngFor="let tag of allTagsShowingKeys" (click)="toggleTag(tag)">{{tag}}</div>
+        </div>
+
+
+
+        <div class="form-floating mb-2 mt-4">
             <input #ingInp type="text" class="form-control" id="floatingPassword" placeholder="Title">
             <label for="floatingTextarea2">Ingredient</label>
         </div>
         <div class="plus_btn" (click)="addIngredient(ingInp)">+ Add Ingredient</div>
 
 
-        <ul class="list-group">
+        <ul class="list-group mb-4 mt-2">
             <li class="list-group-item" *ngFor="let ing of recipeIngredients">{{ing}} <button type="button"
                     class="btn-close" aria-label="Close" (click)="removeIng(ing)"></button> </li>
         </ul>
