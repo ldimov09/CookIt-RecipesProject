@@ -25,9 +25,9 @@ import { TagEditFormComponent } from './recipes/tag-edit-form/tag-edit-form.comp
   imports: [
     BrowserModule,
     AppRoutingModule,
+    RecipesModule,
     ReactiveFormsModule,
     AuthModule,
-    RecipesModule,
     HttpClientModule,
   ],
   providers: [],

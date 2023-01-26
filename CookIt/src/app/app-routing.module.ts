@@ -8,6 +8,7 @@ import { NotloggedGuard } from './auth/not-logged.guard';
 import { RegisterFormComponent } from './auth/register-form/register-form.component';
 import { CatalogComponent } from './recipes/catalog/catalog.component';
 import { CreateRecipeComponent } from './recipes/create-recipe/create-recipe.component';
+import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component';
 import { TagCreateFormComponent } from './recipes/tag-create-form/tag-create-form.component';
 
 const routes: Routes = [
@@ -38,6 +39,10 @@ const routes: Routes = [
     path: 'recipes',
     component: CatalogComponent,
   },
+  {
+    path: 'edit/:id',
+    component: EditRecipeComponent
+  }
 ];
 
 @NgModule({

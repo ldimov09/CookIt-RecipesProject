@@ -1,6 +1,6 @@
 <section class="centered mt-5">
-    <h3>Create your recipe here</h3>
-    <form [formGroup]="form" (ngSubmit)="handleCreate(form)">
+    <h3>Edit your recipe here</h3>
+    <form [formGroup]="form" (ngSubmit)="handleEdit(form)">
 
         <div class="form-floating mb-4">
             <input formControlName="title" type="text" class="form-control" id="floatingPassword" placeholder="Title">
@@ -44,7 +44,7 @@
             <div *ngIf="description?.errors?.['required']">Description is required.</div>
         </div>
         <div class="form-floating mb-2">
-            <input formControlName="imageUrl" type="text" class="form-control" id="floatingPassword"
+            <input formControlName="imageurl" type="text" class="form-control" id="floatingPassword"
                 placeholder="Title">
             <label for="floatingPassword">Image Link</label>
         </div>
@@ -72,3 +72,4 @@
         <button type="submit" [disabled]="form.invalid" class="btn btn-warning">Create</button>
     </form>
 </section>
+

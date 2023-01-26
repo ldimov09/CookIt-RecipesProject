@@ -16,6 +16,10 @@ export class RecipeService {
   getAllRecipes() {
     return this.http.get<any>('https://www.digitalplant.eu/recipes/api/recipes/all.php');
   }
+  getOneRecipe(id:string){
+    return this.http.get<any>('https://www.digitalplant.eu/recipes/api/recipes/getone.php?id=' + id);
+
+  }
 
   createRecipe(recipe: IRecipe){
     return this.http.post<any>('https://www.digitalplant.eu/recipes/api/recipes/create.php', recipe);
@@ -33,6 +37,9 @@ export class RecipeService {
 
   editTag(tag: ITag){
     return this.http.post<any>("https://www.digitalplant.eu/recipes/api/tags/edit.php", tag);
+  }
+  editRecipe(recipe:any){
+    return this.http.post<any>("https://www.digitalplant.eu/recipes/api/recipes/edit.php",recipe);
   }
 
   deleteTag(tag: ITag){
