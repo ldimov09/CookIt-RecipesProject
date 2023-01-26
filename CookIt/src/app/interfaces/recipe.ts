@@ -1,5 +1,5 @@
 export interface IRecipe {
-  _id?: string;
+  id?: string;
   owner: string;
   tags: string[];
   imageurl: string;
@@ -10,5 +10,5 @@ export interface IRecipe {
   likes?: string[];
   dislikes?: string[];
   servings: any;
-  cookTime: any;
+  cooktime: any;
 }

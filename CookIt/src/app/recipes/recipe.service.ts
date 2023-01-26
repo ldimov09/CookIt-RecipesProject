@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthService } from '../auth/auth.service';
 import { IRecipe } from '../interfaces/recipe';
 import { ITag } from '../interfaces/tag';
 
@@ -10,10 +11,10 @@ export class RecipeService {
 
   url = 'http://localhost:3000/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private service: AuthService) { }
 
   getAllRecipes() {
-    return this.http.get<any>(this.url + 'api/recipes');
+    return this.http.get<any>('https://www.digitalplant.eu/recipes/api/recipes/all.php');
   }
 
   createRecipe(recipe: IRecipe){
@@ -36,5 +37,9 @@ export class RecipeService {
 
   deleteTag(tag: ITag){
     return this.http.post<any>("https://www.digitalplant.eu/recipes/api/tags/delete.php", { id: tag.id});
+  }
+
+  reactToRecipe(recipe: IRecipe, reaction: string) {
+    return this.http.post<any>("https://www.digitalplant.eu/recipes/api/recipes/" + reaction + '.php', { recipeId: recipe.id, userId: this.service.user.id}); 
   }
 }

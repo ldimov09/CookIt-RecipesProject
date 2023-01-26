@@ -38,6 +38,7 @@
             <textarea class="form-control" formControlName="description" placeholder="Instructions"
                 id="floatingTextarea2" style="height: 100px"></textarea>
             <label for="floatingTextarea2">Instructions</label>
+            
         </div>
         <div *ngIf="description?.touched && description?.invalid" class="alert alert-danger">
             <div *ngIf="description?.errors?.['required']">Description is required.</div>

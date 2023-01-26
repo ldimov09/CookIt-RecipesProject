@@ -14,9 +14,10 @@ export class AdminComponent {
 	users!: any;
 	tags!: ITag[];
 	editParams!: any;
+	service! : AuthService;
 
-	constructor(private service: AuthService, private recipeService: RecipeService) {
-
+	constructor(service: AuthService, private recipeService: RecipeService, ) {
+		this.service = service
 	}
 
 	ngOnInit() {

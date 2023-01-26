@@ -81,7 +81,7 @@ export class CreateRecipeComponent implements OnInit {
 		description: new FormControl('', [Validators.required]),
 		imageUrl: new FormControl('', [Validators.required]),
 		servings:new FormControl('', [Validators.required]),
-		cookTime: new FormControl('', [Validators.required]),
+		cooktime: new FormControl('', [Validators.required]),
 	});
 	get title(){
 		return this.form.get('title')
@@ -140,7 +140,7 @@ export class CreateRecipeComponent implements OnInit {
 			tags: selectedTags,
 			ingredients: this.recipeIngredients!,
 			imageurl: this.form.value.imageUrl!,
-			cookTime:this.form.value.cookTime,
+			cooktime:this.form.value.cooktime,
 			servings:this.form.value.servings
 
 		};
