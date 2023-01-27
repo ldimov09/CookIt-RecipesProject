@@ -19,10 +19,10 @@ export class EditRecipeComponent implements OnInit {
     private recipeService: RecipeService,
     private service: AuthService,
     private router: Router
-    ) {}
-    id: string = this.activatedRoute.snapshot.params?.['id'];
-    recipe!: IRecipe;
-    ngOnInit() {
+  ) { }
+  id: string = this.activatedRoute.snapshot.params?.['id'];
+  recipe!: IRecipe;
+  ngOnInit() {
     this.recipeService.getAllTags().subscribe({
       next: (allTags) => {
         this.allTagsTemp = allTags;
@@ -41,12 +41,12 @@ export class EditRecipeComponent implements OnInit {
         console.log(error);
       },
     });
-    
+
     this.recipeService.getOneRecipe(this.id).subscribe({
       next: (response: any) => {
         this.recipe = response.result;
-        for(let tag of this.recipe.tags){
-this.allTags[tag].checked = true
+        for (let tag of this.recipe.tags) {
+          this.allTags[tag].checked = true
         }
         console.log(this.recipe);
         this.selectedTagsKeys = this.recipe.tags;
@@ -72,6 +72,8 @@ this.allTags[tag].checked = true
   allTagsShowingKeys: string[] = [];
   keys: any;
   selectedTagsKeys!: string[];
+  allTagsIds!: string[];
+
 
   recipeIngredients!: string[];
 
@@ -83,7 +85,7 @@ this.allTags[tag].checked = true
     imageurl: new FormControl('', [Validators.required]),
     servings: new FormControl('', [Validators.required]),
     cooktime: new FormControl('', [Validators.required]),
-    
+
 
   });
   get title() {
@@ -143,18 +145,25 @@ this.allTags[tag].checked = true
   }
   handleEdit(form: FormGroup) {
     const recipe = form.value;
-    console.log(recipe);
     recipe['id'] = this.recipe.id;
     recipe['owner'] = this.recipe.owner;
-    recipe['tags'] = this.selectedTagsKeys;
+    recipe['tags'] = this.selectedTagsKeys.map(key => this.allTags[key].id);
     recipe['ingredients'] = this.recipeIngredients;
     recipe['comments'] = this.recipe.comments;
     recipe['likes'] = this.recipe.likes;
     recipe['dislikes'] = this.recipe.dislikes;
+    console.log(recipe);
 
     this.recipeService.editRecipe(recipe).subscribe({
       next: (response: any) => {
         //console.log(response.result);
+        if(response.success) {
+          if(this.service.user.role === 'admin' || this.service.user.role ===  'superadmin'){
+            this.router.navigate(['/admin']);
+          }else{
+            this.router.navigate(['/recipes']);
+          }
+        }
       },
       error: (error) => {
         //console.log(error);

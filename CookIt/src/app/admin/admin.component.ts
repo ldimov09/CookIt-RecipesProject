@@ -17,6 +17,9 @@ export class AdminComponent {
   editParams!: any;
   service!: AuthService;
   recipes!: IRecipe[];
+  openedTab: string = 'users';
+  tagOpenedTab: string = 'create';
+
 
   constructor(
     service: AuthService,
@@ -57,6 +60,7 @@ export class AdminComponent {
   }
 
   handleEditTag(tag: ITag) {
+    this.tagOpenedTab = 'edit'
     this.editParams = {
       id: tag.id,
       name: tag.name,

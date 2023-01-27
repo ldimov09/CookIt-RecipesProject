@@ -45,6 +45,8 @@ NOTE: If success = false instead of result there is error with the message of th
 [AA] - authorized as admin,
 [ASA] - authorized superadmin,
 
+/api/recipes/getone.php?id=[id-то]
+
 Get all recipes [Noa]
 req: url: '/api/recipes'
 res: {
@@ -67,7 +69,7 @@ res: {
 }
 
 Edit recipe [A] :
-req: url: '/api/recipes/edit', body: { recipeId, newRecipe }
+req: url: '/api/recipes/edit', body: { newRecipe }
 res: {
     success: true,
     result: <upadted recipe>

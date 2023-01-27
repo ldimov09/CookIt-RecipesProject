@@ -39,7 +39,7 @@ export class RecipeService {
     return this.http.post<any>("https://www.digitalplant.eu/recipes/api/tags/edit.php", tag);
   }
   editRecipe(recipe:any){
-    return this.http.post<any>("https://www.digitalplant.eu/recipes/api/recipes/edit.php",recipe);
+    return this.http.post<any>("https://www.digitalplant.eu/recipes/api/recipes/edit.php", recipe);
   }
 
   deleteTag(tag: ITag){

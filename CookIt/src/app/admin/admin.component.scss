@@ -2,3 +2,19 @@
     float: right;
     margin-left: 10px;
 }
+
+.nav-link {
+    color: #000;
+    cursor: pointer;
+}
+
+
+.change-role-btn { 
+    width: 85px;
+}
+
+.scroll-ul{
+    height: 400px;
+    overflow: auto;
+    border: 1px solid #ccc
+}
