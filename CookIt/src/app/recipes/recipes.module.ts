@@ -7,6 +7,7 @@ import { CatalogComponent } from './catalog/catalog.component';
 import { TagEditFormComponent } from './tag-edit-form/tag-edit-form.component';
 import { TagCreateFormComponent } from './tag-create-form/tag-create-form.component';
 import { EditRecipeComponent } from './edit-recipe/edit-recipe.component';
+import { DetailsRecipeComponent } from './details-recipe/details-recipe.component';
 
 
 
@@ -15,6 +16,7 @@ import { EditRecipeComponent } from './edit-recipe/edit-recipe.component';
     CreateRecipeComponent,
     CatalogComponent,
     EditRecipeComponent,
+    DetailsRecipeComponent,
   ],
   imports: [
     CommonModule,

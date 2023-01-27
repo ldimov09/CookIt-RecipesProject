@@ -2,12 +2,12 @@
 
 <section>
   <ng-container *ngFor="let recipe of recipes">
-    <article class="recipe-card mt-5 ms-5">
+    <article class="recipe-card mt-5 ms-5" style="cursor: pointer;">
       <article>
         <img src="{{ recipe.imageurl }}" width="200" />
       </article>
       <article>
-        <h3>{{ recipe.title }}</h3>
+        <h3 (click)="handleDetails(recipe)">{{ recipe.title }}</h3>
         <ng-container *ngFor="let tag of recipe.tags">
           <div class="tag-selection">{{ tag }}</div>
         </ng-container>

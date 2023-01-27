@@ -8,6 +8,7 @@ import { NotloggedGuard } from './auth/not-logged.guard';
 import { RegisterFormComponent } from './auth/register-form/register-form.component';
 import { CatalogComponent } from './recipes/catalog/catalog.component';
 import { CreateRecipeComponent } from './recipes/create-recipe/create-recipe.component';
+import { DetailsRecipeComponent } from './recipes/details-recipe/details-recipe.component';
 import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component';
 import { TagCreateFormComponent } from './recipes/tag-create-form/tag-create-form.component';
 
@@ -15,24 +16,24 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginFormComponent,
-    canActivate: [NotloggedGuard]
+    canActivate: [NotloggedGuard],
   },
   {
     path: 'register',
     component: RegisterFormComponent,
-    canActivate: [NotloggedGuard]
+    canActivate: [NotloggedGuard],
   },
 
   {
     path: 'create',
     component: CreateRecipeComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
 
   {
     path: 'admin',
     component: AdminComponent,
-    canActivate: [AuthGuard,/*TODO: Make an admin profile AdminGuard*/]
+    canActivate: [AuthGuard /*TODO: Make an admin profile AdminGuard*/],
   },
 
   {
@@ -41,12 +42,16 @@ const routes: Routes = [
   },
   {
     path: 'edit/:id',
-    component: EditRecipeComponent
-  }
+    component: EditRecipeComponent,
+  },
+  {
+    path: 'details/:id',
+    component: DetailsRecipeComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
