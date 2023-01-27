@@ -11,21 +11,22 @@ import { RecipeService } from '../recipe.service';
 })
 export class DetailsRecipeComponent implements OnInit {
   recipes!: IRecipe[];
-  reactionRecipe!:any;
   service!: AuthService;
   constructor(
     private activatedRoute: ActivatedRoute,
     private recipeService: RecipeService,
     service: AuthService
-  ) {
-    this.service = service;
-  }
-  id: string = this.activatedRoute.snapshot.params?.['id'];
-  recipe!: IRecipe;
-  ngOnInit(): void {
-    this.recipeService.getOneRecipe(this.id).subscribe({
-      next: (response: any) => {
-        this.recipe = response.result;
+    ) {
+      this.service = service;
+    }
+    reactionRecipe!:any;
+    id: string = this.activatedRoute.snapshot.params?.['id'];
+    recipe!: IRecipe;
+    ngOnInit(): void {
+      this.recipeService.getOneRecipe(this.id).subscribe({
+        next: (response: any) => {
+          this.recipe = response.result;
+          this.reactionRecipe = response.result
       },
       error: (error: string) => {
         console.log(error);
