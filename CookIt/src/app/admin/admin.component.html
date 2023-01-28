@@ -29,7 +29,7 @@
                 [ngClass]="user.role == 'admin'? 'btn-danger': 'btn-success'"
                 (click)="changeUserRole(user.id, user.role == 'admin'? 'user': 'admin')">{{user.role == "admin"?
                 "Demote": "Promote"}}</button>
-            <button *ngIf="user.role == 'superadmin'" class="btn btn-secondary btn-sm action-btn" disabled>
+            <button *ngIf="user.role == 'superadmin' && this.service.user.role == 'superadmin'" class="btn btn-secondary btn-sm action-btn" disabled>
                 <i>
                     Permanent
                 </i>

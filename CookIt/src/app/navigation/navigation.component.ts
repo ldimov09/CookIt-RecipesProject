@@ -14,7 +14,7 @@ export class NavigationComponent implements OnInit {
 
   constructor(private router: Router, service: AuthService) {
     this.service = service;
-    this.role = this.service.user.role!;
+    this.role = this.service.user?.role!;
     console.log(this.role);
   }
 

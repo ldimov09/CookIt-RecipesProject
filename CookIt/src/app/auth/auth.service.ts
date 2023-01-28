@@ -20,6 +20,8 @@ export class AuthService {
     return user.data;
   }
 
+ 
+
   loginUser(payload: { email: string; password: string }) {
     //return this.http.post(this.url + 'login', payload);
     return this.http.post("https://www.digitalplant.eu/recipes/api/auth/login.php", payload);
