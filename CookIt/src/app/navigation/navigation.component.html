@@ -2,6 +2,7 @@
 <nav class="navbar">
     <div class="container d-flex align-items-center justify-content-between flex-wrap">
         <a id="home-link" class="title" routerLink="/">
+            <img src="../../assets/logo.png" height="50">
              Cook It
         </a>
         <input id="nav-toggle" type="checkbox" class="d-none">
@@ -19,8 +20,10 @@
             </svg>
         </label>
 
+
         <ul id="nav-menu" class="list-unstyled align-items-center d-md-flex m-0 p-0">
 
+            <span *ngIf="this.service.isLoggedIn()">Welcome, {{this.service.user?.name}}</span>
 
             <li class="my-2">
                 <a routerLink="/" class="sign-up btn">Home</a>
@@ -35,12 +38,9 @@
                 <a routerLink="/login" class="sign-up btn">Login</a>
             </li>
             <li class="my-2" *ngIf="!service.isLoggedIn()">
-                <a routerLink="/register" class="sign-up btn btn-success ml-lg-3">Register</a>
+                <a routerLink="/register" class="sign-up btn btn-warning ml-lg-3">Register</a>
             </li>
             
-            <li class="my-2" *ngIf="role! == 'admin'">
-                <a routerLink="/admin" class="sign-up btn">Admin</a>
-            </li>
             <li class="my-2" *ngIf="service.isLoggedIn()">
                 <a (click)="handleLogout()" href="#" class="sign-up btn">Logout</a>
             </li>
@@ -48,7 +48,7 @@
                 <a href="#" class="sign-up btn">My Recipes</a>
             </li>
             <li class="my-2" *ngIf="service.isLoggedIn()">
-                <a routerLink="/create" class="sign-up btn btn-success ml-lg-3">Create Recipe</a>
+                <a routerLink="/create" class="sign-up btn btn-warning ml-lg-3">Create Recipe</a>
             </li>
         
 

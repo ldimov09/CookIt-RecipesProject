@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { async } from '@angular/core/testing';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -21,7 +22,7 @@ export class EditRecipeComponent implements OnInit {
     private router: Router
   ) { }
   id: string = this.activatedRoute.snapshot.params?.['id'];
-  recipe!: IRecipe;
+  recipe!: IRecipe; //What is this? More self explaing variable names!
   ngOnInit() {
     this.recipeService.getAllTags().subscribe({
       next: (allTags) => {
@@ -38,23 +39,24 @@ export class EditRecipeComponent implements OnInit {
         this.allTagsShowingKeys = Object.keys(this.allTagsShowin);
       },
       error: (error) => {
-        console.log(error);
       },
     });
 
     this.recipeService.getOneRecipe(this.id).subscribe({
       next: (response: any) => {
+
         this.recipe = response.result;
+        
         for (let tag of this.recipe.tags) {
           this.allTags[tag].checked = true
         }
-        console.log(this.recipe);
+
         this.selectedTagsKeys = this.recipe.tags;
         this.recipeIngredients = this.recipe.ingredients;
 
         this.form.patchValue({
           title: this.recipe.title,
-          cooktime: this.recipe.cooktime,
+          cooktime: this.recipe.cooktime as unknown as string,
           servings: this.recipe.servings,
           description: this.recipe.description,
           imageurl: this.recipe.imageurl,
@@ -62,7 +64,6 @@ export class EditRecipeComponent implements OnInit {
       },
 
       error: (error) => {
-        console.log(error);
       },
     });
   }
@@ -100,7 +101,7 @@ export class EditRecipeComponent implements OnInit {
   get servings() {
     return this.form.get('servings');
   }
-  get cookTime() {
+  get cooktime() {
     return this.form.get('cookTime');
   }
 
@@ -152,6 +153,9 @@ export class EditRecipeComponent implements OnInit {
     recipe['comments'] = this.recipe.comments;
     recipe['likes'] = this.recipe.likes;
     recipe['dislikes'] = this.recipe.dislikes;
+    recipe['cooktime'] = this.form.value.cooktime;
+    recipe['servings'] = this.form.value.servings;
+    recipe['description'] = this.form.value.description;
     console.log(recipe);
 
     this.recipeService.editRecipe(recipe).subscribe({

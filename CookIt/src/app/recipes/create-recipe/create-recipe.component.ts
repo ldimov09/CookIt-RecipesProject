@@ -80,22 +80,22 @@ export class CreateRecipeComponent implements OnInit {
 		title: new FormControl('', [Validators.required]),
 		description: new FormControl('', [Validators.required]),
 		imageUrl: new FormControl('', [Validators.required]),
-		servings:new FormControl('', [Validators.required]),
+		servings: new FormControl('', [Validators.required]),
 		cooktime: new FormControl('', [Validators.required]),
 	});
-	get title(){
+	get title() {
 		return this.form.get('title')
 	}
-	get description(){
+	get description() {
 		return this.form.get('description')
 	}
-	get imageUrl(){
+	get imageUrl() {
 		return this.form.get('imageUrl')
 	}
-	get servings(){
+	get servings() {
 		return this.form.get('servings')
 	}
-	get cookTime(){
+	get cookTime() {
 		return this.form.get('cookTime')
 	}
 
@@ -116,7 +116,6 @@ export class CreateRecipeComponent implements OnInit {
 					this.allTagsShowingKeys = Object.keys(this.allTagsShowin);
 				},
 				error: (error) => {
-					console.log(error);
 				}
 			})
 
@@ -140,8 +139,8 @@ export class CreateRecipeComponent implements OnInit {
 			tags: selectedTags,
 			ingredients: this.recipeIngredients!,
 			imageurl: this.form.value.imageUrl!,
-			cooktime:this.form.value.cooktime,
-			servings:this.form.value.servings
+			cooktime: Number(this.form.value.cooktime)!,
+			servings: this.form.value.servings
 
 		};
 
@@ -186,9 +185,9 @@ export class CreateRecipeComponent implements OnInit {
 		this.allTagsShowingKeys = Object.keys(this.allTagsShowin);
 		this.showTagMenu = false
 
-	
 
-		
+
+
 	}
 
 	toggleTagMenu() {

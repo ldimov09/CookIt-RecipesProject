@@ -12,6 +12,7 @@ import { RecipesModule } from './recipes/recipes.module';
 import { TagCreateFormComponent } from './recipes/tag-create-form/tag-create-form.component';
 import { AdminComponent } from './admin/admin.component';
 import { TagEditFormComponent } from './recipes/tag-edit-form/tag-edit-form.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { TagEditFormComponent } from './recipes/tag-edit-form/tag-edit-form.comp
     ReactiveFormsModule,
     AuthModule,
     HttpClientModule,
+    RouterModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

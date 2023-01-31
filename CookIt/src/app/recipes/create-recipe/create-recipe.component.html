@@ -54,7 +54,7 @@
         <div class="form-floating mb-2">
             <input formControlName="cooktime" type="text" class="form-control" id="floatingPassword"
                 placeholder="Title">
-            <label for="floatingPassword">Cook Time</label>
+            <label for="floatingPassword">Cook Time (minutes)</label>
         </div>
         <div *ngIf="cookTime?.touched && cookTime?.invalid" class="alert alert-danger">
             <div *ngIf="cookTime?.errors?.['required']">Cook Time is required.</div>

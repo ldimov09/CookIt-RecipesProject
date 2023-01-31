@@ -8,6 +8,7 @@ import { TagEditFormComponent } from './tag-edit-form/tag-edit-form.component';
 import { TagCreateFormComponent } from './tag-create-form/tag-create-form.component';
 import { EditRecipeComponent } from './edit-recipe/edit-recipe.component';
 import { DetailsRecipeComponent } from './details-recipe/details-recipe.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -21,6 +22,7 @@ import { DetailsRecipeComponent } from './details-recipe/details-recipe.componen
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    RouterModule
   ]
 })
 export class RecipesModule { }

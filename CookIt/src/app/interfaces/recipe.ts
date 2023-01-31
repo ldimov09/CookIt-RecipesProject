@@ -10,5 +10,5 @@ export interface IRecipe {
   likes?: string[];
   dislikes?: string[];
   servings: any;
-  cooktime: any;
+  cooktime: number;
 }

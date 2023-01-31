@@ -28,7 +28,6 @@ export class CatalogComponent implements OnInit {
           r.cooktime = Number(r.cooktime);
           r.servings = Number(r.servings);
         });
-        console.log(this.recipes);
       },
     });
   }
@@ -38,11 +37,10 @@ export class CatalogComponent implements OnInit {
       next: (response) => {
         if (response.success) {
           const index = this.recipes.indexOf(recipe);
-		  
+
           response.result.cooktime = Number(response.result.cooktime);
           response.result.servings = Number(response.result.servings);
           this.recipes.splice(index, 1, response.result);
-		  console.log(this.recipes);
         }
       },
     });

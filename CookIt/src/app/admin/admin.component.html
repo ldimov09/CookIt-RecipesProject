@@ -29,7 +29,8 @@
                 [ngClass]="user.role == 'admin'? 'btn-danger': 'btn-success'"
                 (click)="changeUserRole(user.id, user.role == 'admin'? 'user': 'admin')">{{user.role == "admin"?
                 "Demote": "Promote"}}</button>
-            <button *ngIf="user.role == 'superadmin' && this.service.user.role == 'superadmin'" class="btn btn-secondary btn-sm action-btn" disabled>
+            <button *ngIf="user.role == 'superadmin' && this.service.user.role == 'superadmin'"
+                class="btn btn-secondary btn-sm action-btn" disabled>
                 <i>
                     Permanent
                 </i>
@@ -52,8 +53,8 @@
     </ul>
     <div *ngIf="tagOpenedTab === 'create'" class="mb-4">
         <h2 class="mt-3 mb-3">Create New Tag</h2>
-        <app-tag-create-form ></app-tag-create-form>
-    </div >
+        <app-tag-create-form></app-tag-create-form>
+    </div>
     <div *ngIf="tagOpenedTab === 'edit'" class="mb-4">
         <h2 class="mt-3 mb-3">Edit Tag</h2>
         <app-tag-edit-form [editParams]="editParams"></app-tag-edit-form>
@@ -94,7 +95,7 @@
 
     <ul class="list-group">
         <li class="list-group-item" *ngFor="let recipe of recipes">
-            {{recipe.title}}
+            <a (click)="redierctToDetails(recipe.id)" style="cursor: pointer;">{{recipe.title}}</a>
 
             <!-- Action Buttons -->
 

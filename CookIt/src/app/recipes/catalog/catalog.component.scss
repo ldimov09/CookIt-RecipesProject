@@ -90,20 +90,35 @@ h6 {
     display: flex;
     width: 100%;
 }
-.botom-container div{
+.botom-container .left, .right, .center{
     width: 33%;
     display: flex;
 }
 
-.left div{
+.left .likes, .dislikes div{
     width: 50%;
 }
+
+.likes, .dislikes{
+    display: flex;
+    width: 50% !important;
+}
+
+#rection-containers-contaier{
+    width: 100%;
+    display: flex;
+}
+
 .center svg{
     margin: 0 auto
 }
 .right {
     display: flex;
     justify-content: flex-end;
+}
+
+.reaction-button-container{
+    width: 50%;
 }
 
 .full-width{

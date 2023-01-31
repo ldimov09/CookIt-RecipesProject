@@ -33,7 +33,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    canActivate: [AuthGuard /*TODO: Make an admin profile AdminGuard*/],
+    canActivate: [AuthGuard, AdminGuard],
   },
 
   {

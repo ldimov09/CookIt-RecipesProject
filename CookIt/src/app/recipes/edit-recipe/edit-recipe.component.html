@@ -52,12 +52,12 @@
             <div *ngIf="imageUrl?.errors?.['required']">Image Link is required.</div>
         </div>
         <div class="form-floating mb-2">
-            <input formControlName="cooktime" type="text" class="form-control" id="floatingPassword"
+            <input formControlName="cooktime" type="number" class="form-control" id="floatingPassword"
                 placeholder="Title">
-            <label for="floatingPassword">Cook Time</label>
+            <label for="floatingPassword">Cook Time (minutes)</label>
         </div>
-        <div *ngIf="cookTime?.touched && cookTime?.invalid" class="alert alert-danger">
-            <div *ngIf="cookTime?.errors?.['required']">Cook Time is required.</div>
+        <div *ngIf="cooktime?.touched && cooktime?.invalid" class="alert alert-danger">
+            <div *ngIf="cooktime?.errors?.['required']">Cook Time is required.</div>
         </div>
         <div class="form-floating mb-2">
             <input formControlName="servings" type="number" min="1" class="form-control" id="floatingPassword"

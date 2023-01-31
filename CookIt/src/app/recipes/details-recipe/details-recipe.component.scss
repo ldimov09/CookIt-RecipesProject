@@ -1,26 +1,96 @@
 h3 {
-  padding-bottom: 10px;
-  display: inline-block;
-  padding-right: 5px;
+	padding-bottom: 10px;
+	display: inline-block;
+	padding-right: 5px;
 }
 
 .tag-selection {
-  display: inline-block;
-  border-radius: 3px;
-  padding: 0.2em 0.5em 0.3em;
-  border-radius: 14px;
-  background-color: #ffc107;
-  border: 1px solid black;
-  color: black;
-  font-weight: 600;
-  margin: 0.25em 0.1em;
+	display: inline-block;
+	border-radius: 3px;
+	padding: 0.2em 0.5em 0.3em;
+	border-radius: 14px;
+	background-color: #ffc107;
+	border: 1px solid black;
+	color: black;
+	font-weight: 600;
+	margin: 0.25em 0.1em;
 }
 
 .tag-selected {
-  background-color: #cea017;
+	background-color: #cea017;
 }
 
 .tag-selection:hover {
-  background-color: #f8da80;
-  cursor: pointer;
+	background-color: #f8da80;
+	cursor: pointer;
+}
+
+section {
+	box-sizing: border-box;
+}
+
+.leftPart {
+	padding: 5%;
+	width: 40%;
+}
+
+.layout-image {
+	width: 100%;
+	height: 350px;
+}
+
+.image {
+	width: 100%;
+	height: 100%;
+	background-position: center center;
+	background-size: cover;
+	border-radius: 14px;
+}
+
+.info-container {
+	width: 100%;
+}
+
+.info-container span {
+	font-size: 24px;
+}
+
+.centered {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.content {
+	display: flex;
+
+}
+
+.rightPart {
+	width: 60%;
+	padding: 5%
+}
+
+.botom-container {
+	display: flex
+}
+
+.left, .center{
+	display: flex;
+	width: 50%;
+}
+
+.center{
+	justify-content: flex-end;
+}
+
+.left{
+	justify-content: flex-start;
+}
+
+.reaction-containters-container{
+	display: flex;
+}
+
+.likes, .dislikes{
+	display: flex;
 }
