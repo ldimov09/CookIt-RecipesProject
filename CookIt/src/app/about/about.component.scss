@@ -1,3 +1,21 @@
 .full-width{
     width: 100%;
 }
+
+.my-show{
+    display: block !important;
+}
+
+.modal-backdrop{
+    display: none;
+}
+
+.my-fade{
+    background-color: #000;
+    opacity: 0.3;
+}
+
+
+.my-modal{
+    transform: translateY(20px);
+}

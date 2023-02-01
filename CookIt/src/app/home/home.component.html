@@ -27,7 +27,7 @@
 					<div>
 						<!-- tag -->
 						<ng-container *ngFor="let tag of recipe.tags">
-							<div class="tag-selection">{{ tag }}</div>
+							<div class="tag-selection" (click)="searchAndRedirect(tag)">{{ tag }}</div>
 						</ng-container>
 
 						<!-- dark box -->

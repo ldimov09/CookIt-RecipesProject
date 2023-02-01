@@ -3,17 +3,20 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { IRecipe } from 'src/app/interfaces/recipe';
+import { slide, fade } from '../../animation/animation';
 import { RecipeService } from '../recipe.service';
 
 @Component({
 	selector: 'app-details-recipe',
 	templateUrl: './details-recipe.component.html',
 	styleUrls: ['./details-recipe.component.scss'],
+	animations: [ slide, fade ]
 })
 export class DetailsRecipeComponent implements OnInit {
 	recipes!: IRecipe[];
 	service!: AuthService;
 	router!: Router;
+	isModalOpen: boolean = false;
 	constructor(
 		private activatedRoute: ActivatedRoute,
 		private recipeService: RecipeService,
@@ -71,6 +74,31 @@ export class DetailsRecipeComponent implements OnInit {
 	searchAndRedirect(tag: string){
 		this.router.navigate(['/recipes'], { queryParams: { search: tag }} )
 	}
+
+	deleteRecipe(recipe: IRecipe) {
+		this.recipeService.deleteRecipe(recipe.id!)
+			.subscribe({
+				next: (response: any) => {
+					this.closeModal()
+					this.router.navigate(['/recipes'])
+				},
+				error: (response: any) => {
+
+				}
+			})
+	}
+
+	closeModal() {
+		this.isModalOpen = false;
+	  }
+	
+	  handleAction(recipe: IRecipe): void {
+		  this.deleteRecipe(recipe);
+	  }
+	
+	  openModal() {
+		this.isModalOpen = true;
+	  }
 
 
 }

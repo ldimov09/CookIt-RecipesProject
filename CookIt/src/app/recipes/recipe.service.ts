@@ -63,6 +63,12 @@ export class RecipeService {
   reactToRecipe(recipe: IRecipe, reaction: string) {
     const randomApiId = Math.random();
 
-    return this.http.post<any>("https://www.digitalplant.eu/recipes/api/recipes/" + reaction + '.php' +  '&apiId=' + randomApiId, { recipeId: recipe.id, userId: this.service.user.id}); 
+    return this.http.post<any>("https://www.digitalplant.eu/recipes/api/recipes/" + reaction + '.php' +  '?apiId=' + randomApiId, { recipeId: recipe.id, userId: this.service.user.id}); 
+  }
+
+  deleteRecipe(recipeId: string) {
+    const randomApiId = Math.random();
+    
+    return this.http.post<any>("https://www.digitalplant.eu/recipes/api/recipes/delete.php?apiId=" + randomApiId, { id: recipeId})
   }
 }

@@ -48,4 +48,9 @@ export class HomeComponent {
   handleDetails(recipe: IRecipe) {
     this.router.navigate([`/details/${recipe.id}`]);
   }
+
+  searchAndRedirect(tag: string){
+		this.router.navigate(['/recipes'], { queryParams: { search: tag }} )
+	}
+
 }
