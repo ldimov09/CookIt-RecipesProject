@@ -79,13 +79,6 @@ section {
 	width: 50%;
 }
 
-.center{
-	justify-content: flex-end;
-}
-
-.left{
-	justify-content: flex-start;
-}
 
 .reaction-containters-container{
 	display: flex;
@@ -93,4 +86,28 @@ section {
 
 .likes, .dislikes{
 	display: flex;
+}
+
+.left{
+	justify-content: flex-end;
+}
+
+.center{
+	justify-content: center;
+}
+
+@media (max-width: 768px){
+	.leftPart, .rightPart{
+		width: 100%;
+		text-align: center;
+	}
+	
+	.content{
+		flex-wrap: wrap;
+	}
+
+	.center{
+		justify-content: flex-start;
+	}
+
 }

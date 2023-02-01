@@ -14,39 +14,55 @@ export class RecipeService {
   constructor(private http: HttpClient, private service: AuthService) { }
 
   getAllRecipes() {
-    return this.http.get<any>('https://www.digitalplant.eu/recipes/api/recipes/all.php');
+    const randomApiId = Math.random();
+    return this.http.get<any>('https://www.digitalplant.eu/recipes/api/recipes/all.php?apiId=' + randomApiId);
   }
   getOneRecipe(id:string){
-    return this.http.get<any>('https://www.digitalplant.eu/recipes/api/recipes/getone.php?id=' + id);
+    const randomApiId = Math.random();
+    return this.http.get<any>('https://www.digitalplant.eu/recipes/api/recipes/getone.php?id=' + id + '&apiId=' + randomApiId);
 
   }
 
   createRecipe(recipe: IRecipe){
-    return this.http.post<any>('https://www.digitalplant.eu/recipes/api/recipes/create.php', recipe);
+    const randomApiId = Math.random();
+
+    return this.http.post<any>('https://www.digitalplant.eu/recipes/api/recipes/create.php?apiId=' + randomApiId, recipe);
   }
 
   createTag(tag: ITag){
+    const randomApiId = Math.random();
+
     //return this.http.post<any>(this.url + 'api/tag/create', tag)
-    return this.http.post<any>('https://www.digitalplant.eu/recipes/api/tags/create.php', tag)
+    return this.http.post<any>('https://www.digitalplant.eu/recipes/api/tags/create.php?apiId=' + randomApiId, tag)
   }
 
   getAllTags() {
+    const randomApiId = Math.random();
+
     //return this.http.get<any>(this.url + 'api/tags');
-    return this.http.get<any>("https://www.digitalplant.eu/recipes/api/tags/all.php");
+    return this.http.get<any>("https://www.digitalplant.eu/recipes/api/tags/all.php?apiId=" + randomApiId);
   }
 
   editTag(tag: ITag){
-    return this.http.post<any>("https://www.digitalplant.eu/recipes/api/tags/edit.php", tag);
+    const randomApiId = Math.random();
+
+    return this.http.post<any>("https://www.digitalplant.eu/recipes/api/tags/edit.php?apiId=" + randomApiId, tag);
   }
   editRecipe(recipe:any){
-    return this.http.post<any>("https://www.digitalplant.eu/recipes/api/recipes/edit.php", recipe);
+    const randomApiId = Math.random();
+
+    return this.http.post<any>("https://www.digitalplant.eu/recipes/api/recipes/edit.php?apiId=" + randomApiId, recipe);
   }
 
   deleteTag(tag: ITag){
-    return this.http.post<any>("https://www.digitalplant.eu/recipes/api/tags/delete.php", { id: tag.id});
+    const randomApiId = Math.random();
+
+    return this.http.post<any>("https://www.digitalplant.eu/recipes/api/tags/delete.php?apiId=" + randomApiId, { id: tag.id});
   }
 
   reactToRecipe(recipe: IRecipe, reaction: string) {
-    return this.http.post<any>("https://www.digitalplant.eu/recipes/api/recipes/" + reaction + '.php', { recipeId: recipe.id, userId: this.service.user.id}); 
+    const randomApiId = Math.random();
+
+    return this.http.post<any>("https://www.digitalplant.eu/recipes/api/recipes/" + reaction + '.php' +  '&apiId=' + randomApiId, { recipeId: recipe.id, userId: this.service.user.id}); 
   }
 }

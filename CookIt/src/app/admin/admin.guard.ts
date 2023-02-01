@@ -18,10 +18,9 @@ export class AdminGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
-    if (this.service.user.role == 'admin') {
+    if (this.service.user.role == 'admin' || this.service.user.role == 'superadmin') {
       return true;
     } else {
-      
       this.router.navigate(['/recipes']);
       return false;
     }

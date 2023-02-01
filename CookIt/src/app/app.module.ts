@@ -13,6 +13,8 @@ import { TagCreateFormComponent } from './recipes/tag-create-form/tag-create-for
 import { AdminComponent } from './admin/admin.component';
 import { TagEditFormComponent } from './recipes/tag-edit-form/tag-edit-form.component';
 import { RouterModule } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
 
 
 @NgModule({
@@ -22,6 +24,8 @@ import { RouterModule } from '@angular/router';
     TagCreateFormComponent,
     TagEditFormComponent,
     AdminComponent,
+    HomeComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

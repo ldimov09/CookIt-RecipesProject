@@ -23,14 +23,18 @@ export class AuthService {
  
 
   loginUser(payload: { email: string; password: string }) {
+    const randomApiId = Math.random();
+
     //return this.http.post(this.url + 'login', payload);
-    return this.http.post("https://www.digitalplant.eu/recipes/api/auth/login.php", payload);
+    return this.http.post("https://www.digitalplant.eu/recipes/api/auth/login.php?apiId=" + randomApiId, payload);
 
   }
 
   createUser(payload: {username:string, email: string; password: string, }) {
+    const randomApiId = Math.random();
+    
     //return this.http.post(this.url + 'register', payload);
-    return this.http.post("https://www.digitalplant.eu/recipes/api/auth/register.php", payload);
+    return this.http.post("https://www.digitalplant.eu/recipes/api/auth/register.php?apiId=" + randomApiId, payload);
   }
 
   isLoggedIn(){
@@ -41,10 +45,14 @@ export class AuthService {
 
   getAllUsers() {
     //return this.http.get(this.url + "users");
-    return this.http.get("https://www.digitalplant.eu/recipes/api/auth/all.php");
+    const randomApiId = Math.random();
+
+    return this.http.get("https://www.digitalplant.eu/recipes/api/auth/all.php?apiId=" + randomApiId);
   }
 
   changeUserRole(userId: string, role: string) {
-    return this.http.post("https://www.digitalplant.eu/recipes/api/auth/editrole.php", { userId, newRole: role });
+    const randomApiId = Math.random();
+
+    return this.http.post("https://www.digitalplant.eu/recipes/api/auth/editrole.php?apiId=" + randomApiId, { userId, newRole: role });
   }
 }

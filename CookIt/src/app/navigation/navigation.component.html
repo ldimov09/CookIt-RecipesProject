@@ -6,6 +6,7 @@
              Cook It
         </a>
         <input id="nav-toggle" type="checkbox" class="d-none">
+        
         <label id="show-button" for="nav-toggle" class="hamburger d-flex align-items-center d-md-none mb-0">
             <svg class="svg" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <title>Menu Open</title>
@@ -23,35 +24,33 @@
 
         <ul id="nav-menu" class="list-unstyled align-items-center d-md-flex m-0 p-0">
 
-            <span *ngIf="this.service.isLoggedIn()">Welcome, {{this.service.user?.name}}</span>
 
             <li class="my-2">
-                <a routerLink="/" class="sign-up btn">Home</a>
+                <a routerLink="/" class="sign-up btn animated-underline">Home</a>
             </li>
             <li class="my-2">
-                <a routerLink="/" class="sign-up btn">About</a>
+                <a routerLink="/about" class="sign-up btn animated-underline">About</a>
             </li>
             <li class="my-2">
-                <a routerLink="/recipes" class="sign-up btn">Recipes</a>
+                <a routerLink="/recipes" class="sign-up btn animated-underline">Recipes</a>
             </li>
             <li class="my-2" *ngIf="!service.isLoggedIn()">
-                <a routerLink="/login" class="sign-up btn">Login</a>
+                <a routerLink="/login" class="sign-up btn btn-outline-dark me-1 ms-1">Login</a>
             </li>
             <li class="my-2" *ngIf="!service.isLoggedIn()">
-                <a routerLink="/register" class="sign-up btn btn-warning ml-lg-3">Register</a>
+                <a routerLink="/register" class="sign-up btn btn-warning ml-lg-3 ms-1 me-1">Register</a>
             </li>
             
             <li class="my-2" *ngIf="service.isLoggedIn()">
-                <a (click)="handleLogout()" href="#" class="sign-up btn">Logout</a>
+                <a (click)="handleLogout()" href="#" class="sign-up btn btn-outline-dark me-1 ms-1">Logout</a>
             </li>
             <li class="my-2" *ngIf="service.isLoggedIn()">
-                <a href="#" class="sign-up btn">My Recipes</a>
+                <a href="#" class="sign-up btn btn-outline-dark ms-1 me-1">My Recipes</a>
             </li>
             <li class="my-2" *ngIf="service.isLoggedIn()">
-                <a routerLink="/create" class="sign-up btn btn-warning ml-lg-3">Create Recipe</a>
+                <a routerLink="/create" class="sign-up btn btn-warning ml-lg-3 ms-1 me-1">Create Recipe</a>
             </li>
         
-
         </ul>
     </div>
 </nav>

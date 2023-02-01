@@ -84,7 +84,7 @@ export class AdminComponent {
 		});
 	}
 	editRecipe(recipe: IRecipe) {
-		this.router.navigate([`/edit/${recipe.id}`]);
+		this.router.navigate([`/edit/${recipe.id}`], { queryParams: { return: true } });
 	}
 
 

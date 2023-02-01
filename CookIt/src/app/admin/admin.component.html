@@ -1,123 +1,130 @@
-<h1 class="mt-3 mb-3">Welcome Admin! </h1>
+<section class="ps-4 pe-4">
 
-<ul class="nav nav-tabs">
-    <li class="nav-item">
-        <a class="nav-link" [ngClass]="openedTab === 'users'? 'active' : ''"
-            (click)="this.openedTab = 'users'">Users</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" [ngClass]="openedTab === 'recipes'? 'active' : ''"
-            (click)="this.openedTab = 'recipes'">Recipes</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" [ngClass]="openedTab === 'tags'? 'active' : ''" (click)="this.openedTab = 'tags'">Tags</a>
-    </li>
-</ul>
+    <h1 class="mt-3 mb-3">Welcome Admin! </h1>
 
 
-<!-- Users -->
-<ng-container *ngIf="openedTab === 'users'">
 
-    <h2 class="mt-3 mb-3">User List</h2>
-    <ul class="list-group">
-        <li class="list-group-item" *ngFor="let user of users"><span
-                [ngClass]="user.role == 'user'? 'badge bg-secondary': user.role == 'admin'?'badge bg-success': 'badge bg-primary'">{{user.role}}</span>
-            -
-            {{user.email}} - {{user.username}}
-            <button *ngIf="user.role != 'superadmin' && this.service.user.role == 'superadmin'"
-                class="btn btn-sm action-btn change-role-btn"
-                [ngClass]="user.role == 'admin'? 'btn-danger': 'btn-success'"
-                (click)="changeUserRole(user.id, user.role == 'admin'? 'user': 'admin')">{{user.role == "admin"?
-                "Demote": "Promote"}}</button>
-            <button *ngIf="user.role == 'superadmin' && this.service.user.role == 'superadmin'"
-                class="btn btn-secondary btn-sm action-btn" disabled>
-                <i>
-                    Permanent
-                </i>
-            </button>
-        </li>
-
-    </ul>
-</ng-container>
-
-<ng-container *ngIf="openedTab === 'tags'">
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link" aria-current="page" [ngClass]="tagOpenedTab == 'create'? 'active': ''"
-                (click)="this.tagOpenedTab = 'create'">Create New Tag</a>
+            <a class="nav-link" [ngClass]="openedTab === 'users'? 'active' : ''"
+                (click)="this.openedTab = 'users'">Users</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" (click)="this.tagOpenedTab = 'edit'"
-                [ngClass]="tagOpenedTab == 'edit'? 'active': ''">Edit Tag</a>
+            <a class="nav-link" [ngClass]="openedTab === 'recipes'? 'active' : ''"
+                (click)="this.openedTab = 'recipes'">Recipes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [ngClass]="openedTab === 'tags'? 'active' : ''"
+                (click)="this.openedTab = 'tags'">Tags</a>
         </li>
     </ul>
-    <div *ngIf="tagOpenedTab === 'create'" class="mb-4">
-        <h2 class="mt-3 mb-3">Create New Tag</h2>
-        <app-tag-create-form></app-tag-create-form>
-    </div>
-    <div *ngIf="tagOpenedTab === 'edit'" class="mb-4">
-        <h2 class="mt-3 mb-3">Edit Tag</h2>
-        <app-tag-edit-form [editParams]="editParams"></app-tag-edit-form>
-    </div>
-    <ul class="list-group scroll-ul">
-        <li class="list-group-item" *ngFor="let tag of tags">
-            {{tag.name}} - {{tag.incompatible.join(', ')? tag.incompatible.join(', '): '/none/'}}
-
-            <!-- Action Buttons -->
 
 
-            <div class="btn-group action-btn" role="group" aria-label="Basic outlined example">
-                <button type="button" class="btn btn-outline-warning" (click)="handleEditTag(tag)">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                        class=" bi bi-pencil" viewBox="0 0 16 16">
-                        <path
-                            d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
-                    </svg></button>
-                <button type="button" class="btn btn-outline-danger" (click)="handleDeleteTag(tag)">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                        class="bi bi-trash" viewBox="0 0 16 16">
-                        <path
-                            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                        <path fill-rule="evenodd"
-                            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                    </svg></button>
+    <!-- Users -->
+    <ng-container *ngIf="openedTab === 'users'">
 
-            </div>
-        </li>
-    </ul>
-</ng-container>
-
-
-<!-- Recipes -->
-<ng-container *ngIf="openedTab === 'recipes'">
-
-    <h2 class="mt-3 mb-3">Recipe List</h2>
-
-    <ul class="list-group">
-        <li class="list-group-item" *ngFor="let recipe of recipes">
-            <a (click)="redierctToDetails(recipe.id)" style="cursor: pointer;">{{recipe.title}}</a>
-
-            <!-- Action Buttons -->
-
-
-            <div class="btn-group action-btn" role="group" aria-label="Basic outlined example">
-                <button type="button" class="btn btn-outline-warning" (click)="editRecipe(recipe)">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                        class=" bi bi-pencil" viewBox="0 0 16 16">
-                        <path
-                            d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
-                    </svg></button>
-                <button type="button" class="btn btn-outline-danger">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                        class="bi bi-trash" viewBox="0 0 16 16">
-                        <path
-                            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                        <path fill-rule="evenodd"
-                            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                    </svg>
+        <h2 class="mt-3 mb-3">User List</h2>
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let user of users"><span
+                    [ngClass]="user.role == 'user'? 'badge bg-secondary': user.role == 'admin'?'badge bg-success': 'badge bg-primary'">{{user.role}}</span>
+                -
+                {{user.email}} - {{user.username}}
+                <button *ngIf="user.role != 'superadmin' && this.service.user.role == 'superadmin'"
+                    class="btn btn-sm action-btn change-role-btn"
+                    [ngClass]="user.role == 'admin'? 'btn-danger': 'btn-success'"
+                    (click)="changeUserRole(user.id, user.role == 'admin'? 'user': 'admin')">{{user.role == "admin"?
+                    "Demote": "Promote"}}</button>
+                <button *ngIf="user.role == 'superadmin' && this.service.user.role == 'superadmin'"
+                    class="btn btn-secondary btn-sm action-btn" disabled>
+                    <i>
+                        Permanent
+                    </i>
                 </button>
+            </li>
 
-            </div>
-        </li>
-    </ul>
-</ng-container>
+        </ul>
+    </ng-container>
+
+    <ng-container *ngIf="openedTab === 'tags'">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" [ngClass]="tagOpenedTab == 'create'? 'active': ''"
+                    (click)="this.tagOpenedTab = 'create'">Create New Tag</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="this.tagOpenedTab = 'edit'"
+                    [ngClass]="tagOpenedTab == 'edit'? 'active': ''">Edit Tag</a>
+            </li>
+        </ul>
+        <div *ngIf="tagOpenedTab === 'create'" class="mb-4">
+            <h2 class="mt-3 mb-3">Create New Tag</h2>
+            <app-tag-create-form></app-tag-create-form>
+        </div>
+        <div *ngIf="tagOpenedTab === 'edit'" class="mb-4">
+            <h2 class="mt-3 mb-3">Edit Tag</h2>
+            <app-tag-edit-form [editParams]="editParams"></app-tag-edit-form>
+        </div>
+        <ul class="list-group scroll-ul">
+            <li class="list-group-item" *ngFor="let tag of tags">
+                {{tag.name}} - {{tag.incompatible.join(', ')? tag.incompatible.join(', '): '/none/'}}
+
+                <!-- Action Buttons -->
+
+
+                <div class="btn-group action-btn" role="group" aria-label="Basic outlined example">
+                    <button type="button" class="btn btn-outline-warning" (click)="handleEditTag(tag)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            class=" bi bi-pencil" viewBox="0 0 16 16">
+                            <path
+                                d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                        </svg></button>
+                    <button type="button" class="btn btn-outline-danger" (click)="handleDeleteTag(tag)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            class="bi bi-trash" viewBox="0 0 16 16">
+                            <path
+                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                            <path fill-rule="evenodd"
+                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                        </svg></button>
+
+                </div>
+            </li>
+        </ul>
+    </ng-container>
+
+
+    <!-- Recipes -->
+    <ng-container *ngIf="openedTab === 'recipes'">
+
+        <h2 class="mt-3 mb-3">Recipe List</h2>
+
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let recipe of recipes">
+                <a (click)="redierctToDetails(recipe.id)" style="cursor: pointer;">{{recipe.title}}</a>
+
+                <!-- Action Buttons -->
+
+
+                <div class="btn-group action-btn" role="group" aria-label="Basic outlined example">
+                    <button type="button" class="btn btn-outline-warning" (click)="editRecipe(recipe)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            class=" bi bi-pencil" viewBox="0 0 16 16">
+                            <path
+                                d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                        </svg></button>
+                    <button type="button" class="btn btn-outline-danger">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            class="bi bi-trash" viewBox="0 0 16 16">
+                            <path
+                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                            <path fill-rule="evenodd"
+                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                        </svg>
+                    </button>
+
+                </div>
+            </li>
+        </ul>
+    </ng-container>
+
+</section>

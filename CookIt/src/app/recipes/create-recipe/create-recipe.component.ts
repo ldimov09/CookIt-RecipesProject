@@ -150,6 +150,8 @@ export class CreateRecipeComponent implements OnInit {
 			.subscribe({
 
 				next: (response: any) => {
+
+					this.router.navigate(['/recipes'])
 				},
 				error: (err) => {
 				}
