@@ -1,14 +1,14 @@
 <h1 class="text-center mt-3">All Recipes</h1>
 
 <section class="search-container ps-4 pe-4">
-	<h4>Search For</h4>
+	<h4 class="text-start">Search For</h4>
 	<form [formGroup]="form" (ngSubmit)="handleSearch(form)" style="width: 100%;">
 		<div class="search-container-flex">
-			<select class="form-select" style="width: 92%;" aria-label="Default select example" formControlName="searchTag">
+			<select class="form-select" style="max-width: 92%;" aria-label="Default select example" formControlName="searchTag">
 				<option selected value="">Show All</option>
 				<option *ngFor="let tag of allTags" [ngValue]="tag.name">{{tag.name}}</option>
 			</select>
-			<button class="btn btn-warning">Search</button>
+			<button class="btn btn-warning ms-2">Search</button>
 		</div>
 	</form>
 </section>
@@ -30,7 +30,7 @@
 					<div>
 						<!-- tag -->
 						<ng-container *ngFor="let tag of recipe.tags">
-							<div class="tag-selection">{{ tag }}</div>
+							<div class="tag-selection" (click)="searchByTag(tag)">{{ tag }}</div>
 						</ng-container>
 
 						<!-- dark box -->

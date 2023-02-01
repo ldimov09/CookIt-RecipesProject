@@ -128,7 +128,7 @@
 
 		<h1>{{recipe.title}}</h1>
 
-		<div class="tag-selection" *ngFor="let tag of recipe.tags">{{ tag }}</div>
+		<div class="tag-selection" *ngFor="let tag of recipe.tags" (click)="searchAndRedirect(tag)">{{ tag }}</div>
 
 		<h4 class="mt-2 font-weight-bold">Ingredients:</h4>
 		<span style="display: block;" class="ms-2" *ngFor="let ing of recipe.ingredients">

@@ -68,5 +68,9 @@ export class DetailsRecipeComponent implements OnInit {
 		});
 	}
 
+	searchAndRedirect(tag: string){
+		this.router.navigate(['/recipes'], { queryParams: { search: tag }} )
+	}
+
 
 }

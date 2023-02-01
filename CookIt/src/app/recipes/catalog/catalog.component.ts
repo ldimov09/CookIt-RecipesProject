@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { IRecipe } from 'src/app/interfaces/recipe';
 import { ITag } from 'src/app/interfaces/tag';
@@ -13,13 +13,14 @@ import { RecipeService } from '../recipe.service';
 })
 export class CatalogComponent implements OnInit {
   recipes!: IRecipe[];
-  recipesShowing!: IRecipe[];
+  recipesShowing: IRecipe[] = [];
   arr: any = [];
   service!: AuthService;
   allTags!: ITag[];
 
   
   constructor(
+		private activatedRoute: ActivatedRoute,
     private recipeService: RecipeService,
     private router: Router,
     service: AuthService
@@ -33,11 +34,9 @@ export class CatalogComponent implements OnInit {
 
   handleSearch(form: FormGroup) {
     console.log(this.form.value)
-    if(this.form.value.searchTag! !== ''){
-      this.recipesShowing = this.recipes.filter(r => r.tags.includes(this.form.value.searchTag!));
-    }else{
-      this.recipesShowing = this.recipes;
-    }
+    
+    this.search(this.form.value.searchTag!)
+  
   }
 
   ngOnInit() {
@@ -79,9 +78,30 @@ export class CatalogComponent implements OnInit {
       .subscribe({
         next: (allTags) => {
           this.allTags = allTags.result;
+          this.searchByTag(this.activatedRoute.snapshot.queryParamMap.get('search')? this.activatedRoute.snapshot.queryParamMap.get('search')! : "")
         },
         error: (error) => {
         }
       })
+  }
+
+  search(tag: string){
+    console.log('tuk')
+    if(tag !== ''){
+      this.recipesShowing = this.recipes.filter(r => r.tags.includes(tag));
+    }else{
+      this.recipesShowing = this.recipes;
+    }
+  }
+
+
+
+  searchByTag(tag: string) {
+    this.form.setValue({
+      searchTag: tag,
+    })
+
+    this.search(tag);
+
   }
 }
