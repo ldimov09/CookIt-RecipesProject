@@ -16,6 +16,7 @@ import { TagEditFormComponent } from './recipes/tag-edit-form/tag-edit-form.comp
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
+import { StringResourcesService } from './string-resources.service';
 
 
 @NgModule({
@@ -37,8 +38,9 @@ import { AboutComponent } from './about/about.component';
     HttpClientModule,
     RouterModule,
     BrowserAnimationsModule,
+
   ],
-  providers: [],
+  providers: [StringResourcesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

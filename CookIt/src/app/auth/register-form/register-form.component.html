@@ -1,43 +1,43 @@
-<section class="centered">
-    <h3>Register Here</h3>
+<section class="centered mt-5">
+    <h3>{{strService.getResource("register_here")}} </h3>
     <form [formGroup]="form" (ngSubmit)="handleRegister(form)">
         <div class="form-floating mb-3">
             <input formControlName="username" type="username" class="form-control" id="floatingInput"
                 placeholder="Peter Stoynov">
-            <label for="floatingInput">Username</label>
+            <label for="floatingInput">{{strService.getResource("username")}}</label>
         </div>
         <div *ngIf="Username?.touched && Username?.invalid" class="alert alert-danger">
-            <div *ngIf="Username?.errors?.['required']">Username is required.</div>
+            <div *ngIf="Username?.errors?.['required']">{{strService.getResource("username")}} {{strService.getResource("is_required")}}.</div>
         </div>
         <div class="form-floating mb-3">
             <input formControlName="email" type="email" class="form-control" id="floatingInput"
                 placeholder="name@example.com">
-            <label for="floatingInput">Email address</label>
+            <label for="floatingInput">{{strService.getResource("email_address")}}</label>
         </div>
         <div *ngIf="Email?.touched && Email?.invalid" class="alert alert-danger">
-            <div *ngIf="Email?.errors?.['required']">Email is required.</div>
-            <div *ngIf="Email?.errors?.['email']">Invalid email.</div>
+            <div *ngIf="Email?.errors?.['required']">{{strService.getResource("email_address")}} {{strService.getResource("is_required")}}.</div>
+            <div *ngIf="Email?.errors?.['email']">{{strService.getResource("invalid_email")}} </div>
         </div>
         <div class="form-floating mb-3">
             <input formControlName="password" type="password" class="form-control" id="floatingPassword"
                 placeholder="Password">
-            <label for="floatingPassword">Password</label>
+            <label for="floatingPassword">{{strService.getResource("password")}} </label>
         </div>
         <div *ngIf="Password?.touched && Password?.invalid" class="alert alert-danger">
-            <div *ngIf="Password?.errors?.['required']">Password is required.</div>
+            <div *ngIf="Password?.errors?.['required']">{{strService.getResource("password")}} {{strService.getResource("is_required")}}.</div>
         </div>
         <div class="form-floating mb-3">
             <input formControlName="repassword" type="password" class="form-control" id="floatingPassword"
                 placeholder="Password">
-            <label for="floatingPassword">Repeat Password</label>
+            <label for="floatingPassword">{{strService.getResource("repeat_password")}} </label>
         </div>
         <div *ngIf="Repass?.touched && Repass?.invalid" class="alert alert-danger">
-            <div *ngIf="Repass?.errors?.['required']">Repeat password is required.</div>
+            <div *ngIf="Repass?.errors?.['required']">{{strService.getResource("repeat_password")}} {{strService.getResource("is_required")}}.</div>
 
         </div>
         <div *ngIf="form.invalid && form.errors?.['passwordShouldMatch'] && Repass?.valid" class="alert alert-danger">
-            Passwords do not match.</div>
+            {{strService.getResource("passwords_do_not_march")}} </div>
 
-        <button type="submit" [disabled]="form.invalid" class="btn btn-success">Register</button>
+        <button type="submit" [disabled]="form.invalid" class="btn btn-warning">{{strService.getResource("register")}} </button>
     </form>
 </section>

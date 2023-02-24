@@ -4,15 +4,19 @@ import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { IRecipe } from '../interfaces/recipe';
 import { ITag } from '../interfaces/tag';
+import { Subscription } from 'rxjs';
 import { IUser } from '../interfaces/user';
 import { slide, fade } from '../animation/animation';
 import { RecipeService } from '../recipes/recipe.service';
+import { TagEditFormComponent } from '../recipes/tag-edit-form/tag-edit-form.component';
+import { TagCreateFormComponent } from '../recipes/tag-create-form/tag-create-form.component';
+import { StringResourcesService } from '../string-resources.service';
 
 @Component({
 	selector: 'app-admin',
 	templateUrl: './admin.component.html',
 	styleUrls: ['./admin.component.scss'],
-	animations: [ slide, fade ]
+	animations: [slide, fade]
 })
 export class AdminComponent {
 	users!: any;
@@ -24,26 +28,34 @@ export class AdminComponent {
 	tagOpenedTab: string = 'create';
 	isModalOpen: boolean = false;
 
+	strService!: StringResourcesService;
+
 
 	constructor(
 		service: AuthService,
 		private recipeService: RecipeService,
-		private router: Router
+		private router: Router,
+		strService: StringResourcesService
 	) {
+		this.strService = strService;
 		this.service = service;
+		this.router.events.subscribe({
+			next: (event: any) => {
+			}
+		})
 	}
 
 
 	closeModal() {
-	  this.isModalOpen = false;
+		this.isModalOpen = false;
 	}
-  
+
 	handleAction(recipe: IRecipe): void {
 		this.deleteRecipe(recipe);
 	}
-  
+
 	openModal() {
-	  this.isModalOpen = true;
+		this.isModalOpen = true;
 	}
 
 	ngOnInit() {
@@ -126,4 +138,25 @@ export class AdminComponent {
 				}
 			})
 	}
+
+	subscription!: Subscription;
+
+	subscribeToEventEmitter(elementRef: any) {
+		console.log('tuk2')
+		if (elementRef instanceof TagEditFormComponent || elementRef instanceof TagCreateFormComponent) {
+			const child: TagCreateFormComponent | TagEditFormComponent = elementRef;
+
+			child.getAlltags.subscribe((response: any) => {
+				this.getAllTags();
+			})
+		}
+
+	}
+
+	unsubscribeFromEventEmitter() {
+		if (this.subscription) {
+			this.subscription.unsubscribe();
+		}
+	}
+
 }

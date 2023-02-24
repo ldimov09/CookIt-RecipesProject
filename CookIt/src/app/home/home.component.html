@@ -1,14 +1,11 @@
-<img class="full-width mb-5" src='../../assets/banner_home.jpg'>
+<img class="full-width mb-5" src='../../assets/banner_home_{{strService.getLang()}}.jpg'>
 <section class="ps-4 pe-4">
-    <h1 class="text-center">Welcome, {{this.service.user?.name ? this.service.user?.name : 'Guest'}}</h1>
+    <h1 class="text-center">{{strService.getResource("welcome")}}, {{this.service.user?.name ? this.service.user?.name : strService.getResource("guest")}}</h1>
 
-    <p class="p-3 text-center">Welcome to CookIt! Here you will find delicious and easy recipes for every occasion.
-        You'll find it here whether you're looking for a quick weeknight dinner, a special holiday feast, or a creative
-        snack for your kids. Our app is designed with busy home cooks in mind, so you can find exactly what you need in
-        no time. Plus, you can save your favorite recipes. So get cooking and enjoy the delicious recipes!</p>
+    <p class="p-3 text-center">{{strService.getResource("home_page_text")}}</p>
 </section>
 
-<h2 class="text-center">Newest Recipes</h2>
+<h2 class="text-center">{{strService.getResource("newest_recipes")}}</h2>
 
 <section class="mt-5 ps-4 pe-4">
 	<ng-container *ngFor="let recipe of recipes">
@@ -33,7 +30,7 @@
 						<!-- dark box -->
 						<div class="dark-container">
 							<div class="left-part">
-								<h6 style="width: 100%; text-align: center">Servings</h6>
+								<h6 style="width: 100%; text-align: center">{{strService.getResource("servings")}}</h6>
 								<div style="padding-top: 0; margin: 0">
 									<ng-container *ngFor="let _ of [].constructor(recipe.servings)">
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -45,9 +42,9 @@
 								</div>
 							</div>
 							<div class="right-part">
-								<h6 style="width: 100%; text-align: center">Cook Time</h6>
+								<h6 style="width: 100%; text-align: center">{{strService.getResource("cook_time")}}</h6>
 								<p style="margin-bottom: 0px; margin-top: 3px; font-size: 14px">
-									{{ recipe.cooktime }} min
+									{{ recipe.cooktime }} {{strService.getResource("min")}}
 								</p>
 							</div>
 						</div>

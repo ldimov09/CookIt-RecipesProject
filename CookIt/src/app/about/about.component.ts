@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { slide, fade } from '../animation/animation';
+import { StringResourcesService } from '../string-resources.service';
 
 @Component({
   selector: 'app-about',
@@ -8,6 +9,10 @@ import { slide, fade } from '../animation/animation';
   animations: [ slide, fade ]
 })
 export class AboutComponent {
+  strService: StringResourcesService;
+  constructor(strService: StringResourcesService) {
+    this.strService = strService;
+  }
 
   isModalOpen: boolean = false;
 

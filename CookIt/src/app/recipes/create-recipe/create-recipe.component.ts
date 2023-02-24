@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ITag } from 'src/app/interfaces/tag';
+import { StringResourcesService } from 'src/app/string-resources.service';
 import { RecipeService } from '../recipe.service';
 
 @Component({
@@ -72,9 +73,12 @@ export class CreateRecipeComponent implements OnInit {
 	*/
 
 	// ^^^ This monstrosity up here is temporary. It will be removed later. ^^^
+	strService: StringResourcesService;
 
+	constructor(private service: AuthService, private recipeService: RecipeService, private router: Router, strService: StringResourcesService) { 
+		this.strService = strService;
 
-	constructor(private service: AuthService, private recipeService: RecipeService, private router: Router) { }
+	}
 
 	form = new FormGroup({
 		title: new FormControl('', [Validators.required]),
@@ -150,8 +154,10 @@ export class CreateRecipeComponent implements OnInit {
 			.subscribe({
 
 				next: (response: any) => {
+					if(response.success){
+						this.router.navigate(['/recipes'])
+					}
 
-					this.router.navigate(['/recipes'])
 				},
 				error: (err) => {
 				}

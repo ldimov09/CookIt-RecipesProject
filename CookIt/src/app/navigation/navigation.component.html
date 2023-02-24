@@ -26,29 +26,29 @@
 
 
             <li class="my-2">
-                <a routerLink="/" class="sign-up btn animated-underline">Home</a>
+                <a routerLink="/" class="sign-up btn animated-underline">{{strService.getResource("home")}}</a>
             </li>
             <li class="my-2">
-                <a routerLink="/about" class="sign-up btn animated-underline">About</a>
+                <a routerLink="/about" class="sign-up btn animated-underline">{{strService.getResource("about")}}</a>
             </li>
             <li class="my-2">
-                <a routerLink="/recipes" class="sign-up btn animated-underline">Recipes</a>
+                <a routerLink="/recipes" class="sign-up btn animated-underline">{{strService.getResource("recipes")}}</a>
             </li>
             <li class="my-2" *ngIf="!service.isLoggedIn()">
-                <a routerLink="/login" class="sign-up btn btn-outline-dark me-1 ms-1">Login</a>
+                <a routerLink="/login" class="sign-up btn btn-outline-dark me-1 ms-1">{{strService.getResource("login")}}</a>
             </li>
             <li class="my-2" *ngIf="!service.isLoggedIn()">
-                <a routerLink="/register" class="sign-up btn btn-warning ml-lg-3 ms-1 me-1">Register</a>
+                <a routerLink="/register" class="sign-up btn btn-warning ml-lg-3 ms-1 me-1">{{strService.getResource("register")}}</a>
             </li>
             
             <li class="my-2" *ngIf="service.isLoggedIn()">
-                <a (click)="handleLogout()" href="#" class="sign-up btn btn-outline-dark me-1 ms-1">Logout</a>
+                <a (click)="handleLogout()" href="#" class="sign-up btn btn-outline-dark me-1 ms-1">{{strService.getResource("logout")}}</a>
             </li>
             <li class="my-2" *ngIf="service.isLoggedIn()">
-                <a href="#" class="sign-up btn btn-outline-dark ms-1 me-1">My Recipes</a>
+                <a href="#" class="sign-up btn btn-outline-dark ms-1 me-1">{{strService.getResource("my_recipes")}}</a>
             </li>
             <li class="my-2" *ngIf="service.isLoggedIn()">
-                <a routerLink="/create" class="sign-up btn btn-warning ml-lg-3 ms-1 me-1">Create Recipe</a>
+                <a routerLink="/create" class="sign-up btn btn-warning ml-lg-3 ms-1 me-1">{{strService.getResource("create_recipe")}}</a>
             </li>
         
         </ul>

@@ -1,12 +1,12 @@
 <form  [formGroup]="form" (ngSubmit)="handleSubmit(form)">
     <div class="form-floating mb-2">
         <input formControlName="name" type="text" class="form-control" id="floatingPassword" placeholder="Title">
-        <label for="floatingPassword">Name</label>
+        <label for="floatingPassword">{{strService.getResource("name")}}</label>
     </div>
     <div class="form-floating mb-2" style="font-family: 'Consolas', Courier, monospace;">
         <input formControlName="incompatible" type="text" class="form-control" id="floatingPassword" placeholder="Title">
-        <label for="floatingPassword">Incompatible</label>
+        <label for="floatingPassword">{{strService.getResource("incompatible")}}</label>
     </div>
-    <button type="submit" class="btn btn-warning">Edit</button>
+    <button type="submit" class="btn btn-warning">{{strService.getResource("create")}}</button>
 
 </form>

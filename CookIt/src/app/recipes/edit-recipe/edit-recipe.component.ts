@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { IRecipe } from 'src/app/interfaces/recipe';
 import { ITag } from 'src/app/interfaces/tag';
+import { StringResourcesService } from 'src/app/string-resources.service';
 import { RecipeService } from '../recipe.service';
 
 const url: string = 'http://digitalppant.eu/recipes/api';
@@ -15,12 +16,12 @@ const url: string = 'http://digitalppant.eu/recipes/api';
 	styleUrls: ['./edit-recipe.component.scss'],
 })
 export class EditRecipeComponent implements OnInit {
-	constructor(
-		private activatedRoute: ActivatedRoute,
-		private recipeService: RecipeService,
-		private service: AuthService,
-		private router: Router
-	) { }
+	strService: StringResourcesService;
+
+	constructor(private service: AuthService, private recipeService: RecipeService, private router: Router, private activatedRoute: ActivatedRoute, strService: StringResourcesService) { 
+		this.strService = strService;
+
+	}
 	id: string = this.activatedRoute.snapshot.params?.['id'];
 	recipe!: IRecipe; //What is this? More self explaing variable names!
 	ngOnInit() {

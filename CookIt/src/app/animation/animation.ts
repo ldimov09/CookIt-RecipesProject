@@ -21,4 +21,8 @@ export let fade = trigger('fade', [
     transition('void => *', [
         animate("0.3s ease-in", style({ opacity: 1 }))
     ]),
+
+    transition('* => void', [
+        animate("0.2s ease-in", style({ opacity: 0 }))
+    ]),
 ])

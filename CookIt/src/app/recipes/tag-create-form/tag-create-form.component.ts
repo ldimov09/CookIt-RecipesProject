@@ -1,56 +1,68 @@
 import { Component, EventEmitter, Input, Output, OnChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { StringResourcesService } from 'src/app/string-resources.service';
 import { AuthService } from '../../auth/auth.service';
 import { RecipeService } from '../recipe.service';
 
 @Component({
-  selector: 'app-tag-create-form',
-  templateUrl: './tag-create-form.component.html',
-  styleUrls: ['./tag-create-form.component.scss']
+	selector: 'app-tag-create-form',
+	templateUrl: './tag-create-form.component.html',
+	styleUrls: ['./tag-create-form.component.scss']
 })
 export class TagCreateFormComponent {
 
-  @Output() newErrorEvent = new EventEmitter<string>();
+	@Output() getAlltags = new EventEmitter<string>();
+	@Output() newErrorEvent = new EventEmitter<string>();
 
-  errorMessage!: string;
+	errorMessage!: string;
 
-  constructor(private service: AuthService, private recipeService: RecipeService, private router: Router) { }
+	strService: StringResourcesService;
 
-  form = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    incompatible: new FormControl('', [Validators.required]),
-  });
+	constructor(private service: AuthService, private recipeService: RecipeService, private router: Router, strService: StringResourcesService) {
+		this.strService = strService;
+		this.router.events.subscribe({
+			next: (event: any) => {
+			}
+		})
+	}
 
-  handleSubmit(form: FormGroup) {
+	form = new FormGroup({
+		name: new FormControl('', [Validators.required]),
+		incompatible: new FormControl('', [Validators.required]),
+	});
 
-    const incompatibleArray = this.form.value.incompatible!.split(', ');
+	handleSubmit(form: FormGroup) {
 
-    const formValue = {
-      name: this.form.value.name!,
-      incompatible: incompatibleArray,
-    };
+		const incompatibleArray = this.form.value.incompatible!.split(', ');
 
-    
-    this.recipeService.createTag(formValue)
-      .subscribe({
-        next: (response) => {
-          if(!response.success){
-            this.emitError(response.error)
-          }
-        },
-        error: (error) => {
-          this.emitError(error);
-        }
-      })
-    
+		const formValue = {
+			name: this.form.value.name!,
+			incompatible: incompatibleArray,
+		};
 
-    
-  }
 
-  emitError(error: string) {
-    this.newErrorEvent.emit(error);
-  }
-  
+		this.recipeService.createTag(formValue)
+			.subscribe({
+				next: (response) => {
+					if (!response.success) {
+						this.emitError(response.error)
+					} else {
+						this.getAlltags.emit('getAllTags')
+					}
+				},
+				error: (error) => {
+					this.emitError(error);
+				}
+			})
+
+
+
+	}
+
+	emitError(error: string) {
+		this.newErrorEvent.emit(error);
+	}
+
 }
 

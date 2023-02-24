@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ITag } from 'src/app/interfaces/tag';
+import { StringResourcesService } from 'src/app/string-resources.service';
 import { RecipeService } from '../recipe.service';
 
 @Component({
@@ -14,10 +15,20 @@ export class TagEditFormComponent {
   @Input() editParams: any = ''
 
   @Output() newErrorEvent = new EventEmitter<string>();
+  @Output() getAlltags = new EventEmitter<string>();
 
   errorMessage!: string;
+  
+	strService: StringResourcesService;
 
-  constructor(private service: AuthService, private recipeService: RecipeService, private router: Router) { }
+  constructor(private service: AuthService, private recipeService: RecipeService, private router: Router,  strService: StringResourcesService) {
+    this.strService = strService;
+    this.router.events.subscribe({
+      next: (event: any) => {
+
+      }
+    })
+  }
 
   form = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -41,6 +52,10 @@ export class TagEditFormComponent {
     this.recipeService.editTag(formValue)
     .subscribe({
       next: (response) => {
+
+        if(response.success){
+          this.getAlltags.emit('getAllTags');
+        }
       },
       error: (response) => {
       }

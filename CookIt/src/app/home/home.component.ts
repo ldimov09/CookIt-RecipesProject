@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { IRecipe } from '../interfaces/recipe';
 import { RecipeService } from '../recipes/recipe.service';
+import { StringResourcesService } from '../string-resources.service';
 
 @Component({
   selector: 'app-home',
@@ -11,9 +12,11 @@ import { RecipeService } from '../recipes/recipe.service';
 })
 export class HomeComponent {
   service!: AuthService;
+  strService! : StringResourcesService;
   recipes!: IRecipe[];
-  constructor(service: AuthService, private recipeService: RecipeService, private router: Router) {
+  constructor(service: AuthService, private recipeService: RecipeService, private router: Router, strService: StringResourcesService) {
     this.service = service;
+    this.strService = strService;
   }
 
   ngOnInit() {

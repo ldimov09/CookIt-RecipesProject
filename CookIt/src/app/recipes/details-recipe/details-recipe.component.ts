@@ -3,6 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { IRecipe } from 'src/app/interfaces/recipe';
+import { StringResourcesService } from 'src/app/string-resources.service';
 import { slide, fade } from '../../animation/animation';
 import { RecipeService } from '../recipe.service';
 
@@ -17,14 +18,17 @@ export class DetailsRecipeComponent implements OnInit {
 	service!: AuthService;
 	router!: Router;
 	isModalOpen: boolean = false;
+	strService: StringResourcesService;
 	constructor(
 		private activatedRoute: ActivatedRoute,
 		private recipeService: RecipeService,
 		service: AuthService,
-		router: Router
+		router: Router,
+		strService: StringResourcesService
 	) {
 		this.service = service;
 		this.router = router;
+		this.strService = strService;
 	}
 	reactionRecipe!: any;
 	id: string = this.activatedRoute.snapshot.params?.['id'];

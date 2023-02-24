@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { IRecipe } from 'src/app/interfaces/recipe';
 import { ITag } from 'src/app/interfaces/tag';
+import { StringResourcesService } from 'src/app/string-resources.service';
 import { RecipeService } from '../recipe.service';
 
 @Component({
@@ -17,26 +18,30 @@ export class CatalogComponent implements OnInit {
   arr: any = [];
   service!: AuthService;
   allTags!: ITag[];
+  strService!: StringResourcesService;
+  isLoading: boolean = true;
 
-  
+
   constructor(
-		private activatedRoute: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private recipeService: RecipeService,
     private router: Router,
-    service: AuthService
+    service: AuthService,
+    strService: StringResourcesService
   ) {
     this.service = service;
+    this.strService = strService;
   }
-  
+
   form = new FormGroup({
-		searchTag: new FormControl('', [])
-	});
+    searchTag: new FormControl('', [])
+  });
 
   handleSearch(form: FormGroup) {
     console.log(this.form.value)
-    
+
     this.search(this.form.value.searchTag!)
-  
+
   }
 
   ngOnInit() {
@@ -49,6 +54,8 @@ export class CatalogComponent implements OnInit {
         });
 
         this.recipesShowing = this.recipes;
+
+        this.isLoading = false;
 
         this.getAllTags();
 
@@ -78,18 +85,18 @@ export class CatalogComponent implements OnInit {
       .subscribe({
         next: (allTags) => {
           this.allTags = allTags.result;
-          this.searchByTag(this.activatedRoute.snapshot.queryParamMap.get('search')? this.activatedRoute.snapshot.queryParamMap.get('search')! : "")
+          this.searchByTag(this.activatedRoute.snapshot.queryParamMap.get('search') ? this.activatedRoute.snapshot.queryParamMap.get('search')! : "")
         },
         error: (error) => {
         }
       })
   }
 
-  search(tag: string){
+  search(tag: string) {
     console.log('tuk')
-    if(tag !== ''){
+    if (tag !== '') {
       this.recipesShowing = this.recipes.filter(r => r.tags.includes(tag));
-    }else{
+    } else {
       this.recipesShowing = this.recipes;
     }
   }
@@ -104,4 +111,5 @@ export class CatalogComponent implements OnInit {
     this.search(tag);
 
   }
+
 }

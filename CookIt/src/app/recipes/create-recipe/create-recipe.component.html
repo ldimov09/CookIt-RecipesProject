@@ -1,22 +1,22 @@
 <section class="centered mt-5">
-    <h3>Create your recipe here</h3>
+    <h3>{{strService.getResource("create_your_recipe")}}</h3>
     <form [formGroup]="form" (ngSubmit)="handleCreate(form)">
 
         <div class="form-floating mb-4">
             <input formControlName="title" type="text" class="form-control" id="floatingPassword" placeholder="Title">
-            <label for="floatingPassword">Title</label>
+            <label for="floatingPassword">{{strService.getResource("title")}}</label>
         </div>
         <div *ngIf="title?.touched && title?.invalid" class="alert alert-danger">
-            <div *ngIf="title?.errors?.['required']">Title is required.</div>
+            <div *ngIf="title?.errors?.['required']">{{strService.getResource("title")}} {{strService.getResource("is_required")}}.</div>
         </div>
 
         <div>
             <div class="tag-selection" *ngFor="let tag of selectedTagsKeys" (click)="toggleTag(tag)">{{tag}}</div>
-            <div class="plus_btn mb-2" (click)="toggleTagMenu()">+ Add Tag</div>
+            <div class="plus_btn mb-2" (click)="toggleTagMenu()">+ {{strService.getResource("add_tag")}}</div>
         </div>
 
         <div *ngIf="showTagMenu" class="mb-2">
-            <h4>Choose Tag: </h4>
+            <h4>{{strService.getResource("choose_tag")}}: </h4>
             <div class="tag-selection" *ngFor="let tag of allTagsShowingKeys" (click)="toggleTag(tag)">{{tag}}</div>
         </div>
 
@@ -24,9 +24,9 @@
 
         <div class="form-floating mb-2 mt-4">
             <input #ingInp type="text" class="form-control" id="floatingPassword" placeholder="Title">
-            <label for="floatingTextarea2">Ingredient</label>
+            <label for="floatingTextarea2">{{strService.getResource("ingredient")}}</label>
         </div>
-        <div class="plus_btn" (click)="addIngredient(ingInp)">+ Add Ingredient</div>
+        <div class="plus_btn" (click)="addIngredient(ingInp)">+ {{strService.getResource("add_ingredient")}}</div>
 
 
         <ul class="list-group mb-4 mt-2">
@@ -37,38 +37,38 @@
         <div class="form-floating mb-2">
             <textarea class="form-control" formControlName="description" placeholder="Instructions"
                 id="floatingTextarea2" style="height: 100px"></textarea>
-            <label for="floatingTextarea2">Instructions</label>
+            <label for="floatingTextarea2">{{strService.getResource("instructions")}}</label>
             
         </div>
         <div *ngIf="description?.touched && description?.invalid" class="alert alert-danger">
-            <div *ngIf="description?.errors?.['required']">Description is required.</div>
+            <div *ngIf="description?.errors?.['required']">{{strService.getResource("instructions")}} {{strService.getResource("is_required")}}.</div>
         </div>
         <div class="form-floating mb-2">
             <input formControlName="imageUrl" type="text" class="form-control" id="floatingPassword"
                 placeholder="Title">
-            <label for="floatingPassword">Image Link</label>
+            <label for="floatingPassword">{{strService.getResource("image_link")}}</label>
         </div>
         <div *ngIf="imageUrl?.touched && imageUrl?.invalid" class="alert alert-danger">
-            <div *ngIf="imageUrl?.errors?.['required']">Image Link is required.</div>
+            <div *ngIf="imageUrl?.errors?.['required']">{{strService.getResource("image_link")}} {{strService.getResource("is_required")}}.</div>
         </div>
         <div class="form-floating mb-2">
             <input formControlName="cooktime" type="text" class="form-control" id="floatingPassword"
                 placeholder="Title">
-            <label for="floatingPassword">Cook Time (minutes)</label>
+            <label for="floatingPassword">{{strService.getResource("cook_time") | titlecase}} ({{strService.getResource("minutes")}})</label>
         </div>
         <div *ngIf="cookTime?.touched && cookTime?.invalid" class="alert alert-danger">
-            <div *ngIf="cookTime?.errors?.['required']">Cook Time is required.</div>
+            <div *ngIf="cookTime?.errors?.['required']">{{strService.getResource("cook_time")}} {{strService.getResource("is_required")}}.</div>
         </div>
         <div class="form-floating mb-2">
             <input formControlName="servings" type="number" min="1" class="form-control" id="floatingPassword"
                 placeholder="Title">
-            <label for="floatingPassword">Servings</label>
+            <label for="floatingPassword">{{strService.getResource("servings") | titlecase}}</label>
         </div>
         <div *ngIf="servings?.touched && servings?.invalid" class="alert alert-danger">
-            <div *ngIf="servings?.errors?.['min']">Servings have to be at least 1 portion.</div>
+            <div *ngIf="servings?.errors?.['min']">{{strService.getResource("servings_1_por")}}</div>
 
-            <div *ngIf="servings?.errors?.['required']">Servings are required.</div>
+            <div *ngIf="servings?.errors?.['required']">{{strService.getResource("servings") | titlecase}} {{strService.getResource("is_required")}}.</div>
         </div>
-        <button type="submit" [disabled]="form.invalid" class="btn btn-warning">Create</button>
+        <button type="submit" [disabled]="form.invalid" class="btn btn-warning">{{strService.getResource("create")}}</button>
     </form>
 </section>

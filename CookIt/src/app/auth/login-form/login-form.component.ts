@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { StringResourcesService } from 'src/app/string-resources.service';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -15,9 +16,11 @@ export class LoginFormComponent {
   @Output() newErrorEvent = new EventEmitter<string>();
 
   errorMessage!: string;
+  strService: StringResourcesService;
 
-
-  constructor(private service: AuthService, private router: Router) { }
+  constructor(private service: AuthService, private router: Router, strService: StringResourcesService) {
+    this.strService = strService;
+  }
 
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),

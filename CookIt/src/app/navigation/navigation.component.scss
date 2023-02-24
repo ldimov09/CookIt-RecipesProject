@@ -58,6 +58,11 @@ nav {
     transform: scaleX(1);
 }
 
+.animated-underline{
+    border: 0px;
+}
+
+
 @media (max-width: 400px) {
     .title {
         margin-left: 20%;

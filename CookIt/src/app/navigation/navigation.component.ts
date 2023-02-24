@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
+import { StringResourcesService } from '../string-resources.service';
 
 @Component({
   selector: 'navigation',
@@ -11,8 +12,9 @@ export class NavigationComponent implements OnInit {
   role!: string;
   service!: AuthService;
   isShowDivIf = true;
-
-  constructor(private router: Router, service: AuthService) {
+  strService: StringResourcesService;
+  constructor(private router: Router, service: AuthService, strService: StringResourcesService) {
+    this.strService = strService;
     this.service = service;
     this.role = this.service.user?.role!;
   }
