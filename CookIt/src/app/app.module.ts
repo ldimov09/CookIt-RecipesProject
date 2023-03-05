@@ -17,6 +17,7 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { StringResourcesService } from './string-resources.service';
+import { FavoritesCatalogComponent } from './recipes/favorites-catalog/favorites-catalog.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { StringResourcesService } from './string-resources.service';
     AdminComponent,
     HomeComponent,
     AboutComponent,
+    FavoritesCatalogComponent,
   ],
   imports: [
     BrowserModule,

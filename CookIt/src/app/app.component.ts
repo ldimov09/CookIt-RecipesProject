@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { LoginFormComponent } from './auth/login-form/login-form.component';
 import { RegisterFormComponent } from './auth/register-form/register-form.component';
 import { TagCreateFormComponent } from './recipes/tag-create-form/tag-create-form.component';
+import { StringResourcesService } from './string-resources.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,10 @@ import { TagCreateFormComponent } from './recipes/tag-create-form/tag-create-for
 })
 export class AppComponent {
 
-  constructor(private router: Router){
+  strService: StringResourcesService;
+
+  constructor(private router: Router, strService: StringResourcesService){
+    this.strService = strService;
     this.router.events.subscribe({
       next: (event: any) => {
           this.showWarning = false;

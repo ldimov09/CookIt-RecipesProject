@@ -45,7 +45,7 @@
                 <a (click)="handleLogout()" href="#" class="sign-up btn btn-outline-dark me-1 ms-1">{{strService.getResource("logout")}}</a>
             </li>
             <li class="my-2" *ngIf="service.isLoggedIn()">
-                <a href="#" class="sign-up btn btn-outline-dark ms-1 me-1">{{strService.getResource("my_recipes")}}</a>
+                <a routerLink='/favorites' class="sign-up btn btn-outline-dark ms-1 me-1">{{strService.getResource("favorites")}}</a>
             </li>
             <li class="my-2" *ngIf="service.isLoggedIn()">
                 <a routerLink="/create" class="sign-up btn btn-warning ml-lg-3 ms-1 me-1">{{strService.getResource("create_recipe")}}</a>

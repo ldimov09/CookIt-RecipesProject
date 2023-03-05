@@ -17,6 +17,7 @@ export class AuthService {
     const helper = new JwtHelperService();
     const user = helper.decodeToken(token);
 
+
     return user.data;
   }
 
@@ -52,7 +53,13 @@ export class AuthService {
 
   changeUserRole(userId: string, role: string) {
     const randomApiId = Math.random();
-
+  
     return this.http.post("https://www.digitalplant.eu/recipes/api/auth/editrole.php?apiId=" + randomApiId, { userId, newRole: role });
+  }
+  
+  getUserById(userId: string) {
+    const randomApiId = Math.random();
+  
+    return this.http.post("https://www.digitalplant.eu/recipes/api/auth/getone.php?apiId=" + randomApiId, { userId });
   }
 }

@@ -25,16 +25,16 @@
 
         <h2 class="mt-3 mb-3">{{strService.getResource("user_list")}}</h2>
         <ul class="list-group">
-            <li class="list-group-item" *ngFor="let user of users"><span
+            <li class="list-group-item" *ngFor="let user of users; let i = index"><span
                     [ngClass]="user.role! == 'user'? 'badge bg-secondary': user.role == 'admin'?'badge bg-success': 'badge bg-primary'">{{user.role!
                     == 'user'? strService.getResource("user"): user.role == 'admin'?strService.getResource("admin"):
                     strService.getResource("superadmin")}}</span>
                 -
-                {{user.email}} - {{user.username}}
+                {{user.email}} - {{user.username}} - {{user.id}}
                 <button *ngIf="user.role != 'superadmin' && this.service.user.role == 'superadmin'"
                     class="btn btn-sm action-btn change-role-btn"
                     [ngClass]="user.role == 'admin'? 'btn-danger': 'btn-success'"
-                    (click)="changeUserRole(user.id, user.role == 'admin'? 'user': 'admin')">{{user.role == "admin"?
+                    (click)="changeUserRole(user.id, user.role == 'admin'? 'user': 'admin', i)">{{user.role == "admin"?
                     strService.getResource("demote"): strService.getResource("promote")}}</button>
                 <button *ngIf="user.role == 'superadmin' && this.service.user.role == 'superadmin'"
                     class="btn btn-secondary btn-sm action-btn" disabled>

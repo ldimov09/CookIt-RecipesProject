@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { IRecipe } from 'src/app/interfaces/recipe';
 import { ITag } from 'src/app/interfaces/tag';
+import { IUser } from 'src/app/interfaces/user';
 import { StringResourcesService } from 'src/app/string-resources.service';
 import { RecipeService } from '../recipe.service';
 
@@ -16,6 +17,13 @@ export class CatalogComponent implements OnInit {
   recipes!: IRecipe[];
   recipesShowing: IRecipe[] = [];
   arr: any = [];
+  user: IUser = {
+    id: "",
+    name: "",
+    email: "",
+    reports: 0,
+    myRecipes: [],
+  };
   service!: AuthService;
   allTags!: ITag[];
   strService!: StringResourcesService;
@@ -86,12 +94,28 @@ export class CatalogComponent implements OnInit {
         next: (allTags) => {
           this.allTags = allTags.result;
           this.searchByTag(this.activatedRoute.snapshot.queryParamMap.get('search') ? this.activatedRoute.snapshot.queryParamMap.get('search')! : "")
+          if(this.service.isLoggedIn()) {
+            this.getUserById(this.service.user.id);
+          }
         },
         error: (error) => {
         }
       })
   }
 
+
+  getUserById(id: string) {
+    this.service.getUserById(id).subscribe({
+      next: (response: any) => {
+        this.user = response.result;
+      },
+      error: () => {
+
+      }
+
+   })
+  }
+ 
   search(tag: string) {
     console.log('tuk')
     if (tag !== '') {
@@ -110,6 +134,19 @@ export class CatalogComponent implements OnInit {
 
     this.search(tag);
 
+  }
+
+  changeFavoriteStatus(recipeId: string, newStatus: number){
+
+
+    this.recipeService.changeFavoriteStatus(recipeId, this.user.id, newStatus).subscribe({
+      next: (response: any) => {
+        this.user = response.result;
+      }, 
+      error: () => {
+
+      }
+    })
   }
 
 }

@@ -71,4 +71,17 @@ export class RecipeService {
     
     return this.http.post<any>("https://www.digitalplant.eu/recipes/api/recipes/delete.php?apiId=" + randomApiId, { id: recipeId})
   }
+
+  changeFavoriteStatus(recipeId: string, userId: string, reactionType: number){
+    const randomApiId = Math.random();
+
+    return this.http.post<any>("https://www.digitalplant.eu/recipes/api/favorites/change.php?apiId=" + randomApiId, { userId, recipeId, reactionType})
+
+  }
+
+  getUserFavorites(userId: string){
+    const randomApiId = Math.random();
+
+    return this.http.post<any>("https://www.digitalplant.eu/recipes/api/favorites/get.php?apiId=" + randomApiId, { userId })
+  }
 }

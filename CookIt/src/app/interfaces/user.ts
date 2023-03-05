@@ -5,5 +5,5 @@ export interface IUser{
     name: string;
     email: string;
     reports?: number;
-    myRecipes: IRecipe[];
+    myRecipes: string[];
 }

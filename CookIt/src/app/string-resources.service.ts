@@ -7,6 +7,13 @@ export class StringResourcesService {
 
   data = [
     {
+      "id": "contact",
+      "val": {
+        "en": "Contact us", 
+        "bg": "Свържете се"
+      }
+    },
+    {
       "id": "irreversable",
       "val": {
         "en": "Are you sure you want to delete this recipe? This action is irreversible",
@@ -119,10 +126,10 @@ export class StringResourcesService {
       }
     },
     {
-      "id": "my_recipes",
+      "id": "favorites",
       "val": {
-        "en": "My Recipes",
-        "bg": "Моите Рецепти"
+        "en": "Favorites",
+        "bg": "Любими"
       }
     },
     {
@@ -474,7 +481,7 @@ export class StringResourcesService {
     }
   ]
 
-  lang = 'en'
+  lang = 'bg'
 
   constructor() { }
 

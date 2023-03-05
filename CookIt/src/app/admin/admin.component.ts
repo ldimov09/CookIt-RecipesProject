@@ -62,6 +62,7 @@ export class AdminComponent {
 		this.service.getAllUsers().subscribe({
 			next: (response: any) => {
 				this.users = response.result;
+				console.log(response.result);
 				this.getAllTags();
 			},
 			error: () => { },
@@ -103,10 +104,11 @@ export class AdminComponent {
 		});
 	}
 
-	changeUserRole(userId: string, newRole: string) {
+	changeUserRole(userId: string, newRole: string, index: number) {
+		console.log(userId);
 		this.service.changeUserRole(userId, newRole).subscribe({
 			next: (response: any) => {
-				this.users[Number(userId) - 1] = response.result;
+				this.users[index] = response.result;
 			},
 			error: (response: any) => { },
 		});

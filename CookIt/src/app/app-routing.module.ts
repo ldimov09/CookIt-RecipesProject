@@ -7,12 +7,12 @@ import { AuthGuard } from './auth/logged.guard';
 import { LoginFormComponent } from './auth/login-form/login-form.component';
 import { NotloggedGuard } from './auth/not-logged.guard';
 import { RegisterFormComponent } from './auth/register-form/register-form.component';
+import { FavoritesCatalogComponent } from './recipes/favorites-catalog/favorites-catalog.component';
 import { HomeComponent } from './home/home.component';
 import { CatalogComponent } from './recipes/catalog/catalog.component';
 import { CreateRecipeComponent } from './recipes/create-recipe/create-recipe.component';
 import { DetailsRecipeComponent } from './recipes/details-recipe/details-recipe.component';
 import { EditRecipeComponent } from './recipes/edit-recipe/edit-recipe.component';
-import { TagCreateFormComponent } from './recipes/tag-create-form/tag-create-form.component';
 
 const routes: Routes = [
   {
@@ -36,6 +36,12 @@ const routes: Routes = [
     path: 'admin',
     component: AdminComponent,
     canActivate: [AuthGuard, AdminGuard],
+  },
+
+  {
+    path: 'favorites',
+    component: FavoritesCatalogComponent,
+    canActivate: [AuthGuard],
   },
 
   {
