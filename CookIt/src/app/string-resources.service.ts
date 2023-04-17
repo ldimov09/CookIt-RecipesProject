@@ -7,6 +7,41 @@ export class StringResourcesService {
 
   data = [
     {
+      "id": "pending",
+      "val": {
+        "en": "Pending", 
+        "bg": "Чакащи"
+      }
+    },
+    {
+      "id": "approve",
+      "val": {
+        "en": "approve", 
+        "bg": "Одобри"
+      }
+    },
+    {
+      "id": "reject",
+      "val": {
+        "en": "Reject", 
+        "bg": "Отхвърли"
+      }
+    },
+    {
+      "id": "accepted",
+      "val": {
+        "en": "Approved", 
+        "bg": "Одобрени"
+      }
+    },
+    {
+      "id": "accept",
+      "val": {
+        "en": "Approving", 
+        "bg": "Одобрение"
+      }
+    },
+    {
       "id": "contact",
       "val": {
         "en": "Contact us", 

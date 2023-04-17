@@ -26,7 +26,10 @@ export class AdminComponent {
 	recipes!: IRecipe[];
 	openedTab: string = 'users';
 	tagOpenedTab: string = 'create';
+	acceptOpenedTab: string = 'accepted';
 	isModalOpen: boolean = false;
+	recipesPending!: IRecipe[];
+	recipesApproved!: IRecipe[];
 
 	strService!: StringResourcesService;
 
@@ -71,6 +74,8 @@ export class AdminComponent {
 		this.recipeService.getAllRecipes().subscribe({
 			next: (response: any) => {
 				this.recipes = response.result;
+				this.recipesPending = this.recipes.filter(r => { if(r.approved == "0") { return true } else { return false }});
+				this.recipesApproved = this.recipes.filter(r => { if(r.approved == "1") { return true } else { return false }});							
 			},
 			error: (error) => {
 			},
@@ -129,6 +134,8 @@ export class AdminComponent {
 					this.recipeService.getAllRecipes().subscribe({
 						next: (response: any) => {
 							this.recipes = response.result;
+							this.recipesPending = this.recipes.filter(r => { if(r.approved == "0") { return true } else { return false }});
+							this.recipesApproved = this.recipes.filter(r => { if(r.approved == "1") { return true } else { return false }});	
 							this.closeModal()
 						},
 						error: (error) => {
@@ -139,6 +146,36 @@ export class AdminComponent {
 
 				}
 			})
+	}
+
+	reject(recipe: IRecipe) {
+		this.recipeService.changeApproved(recipe.id!, 0).subscribe({
+			next: () => {
+				const index = this.recipesApproved.findIndex(r => {
+					return r.id === recipe.id
+				})
+				this.recipesApproved.splice(index, 1);
+				this.recipesPending.push(recipe);
+			},
+			error: () => {
+
+			}
+		})
+	}
+
+	accept(recipe: IRecipe) {
+		this.recipeService.changeApproved(recipe.id!, 1).subscribe({
+			next: () => {
+				const index = this.recipesPending.findIndex(r => {
+					return r.id === recipe.id
+				})
+				this.recipesPending.splice(index, 1);
+				this.recipesApproved.push(recipe);
+			},
+			error: () => {
+
+			}
+		})
 	}
 
 	subscription!: Subscription;

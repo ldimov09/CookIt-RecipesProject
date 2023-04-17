@@ -17,6 +17,10 @@
             <a class="nav-link" [ngClass]="openedTab === 'tags'? 'active' : ''"
                 (click)="this.openedTab = 'tags'">{{strService.getResource("tags")}}</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" [ngClass]="openedTab === 'accept'? 'active' : ''"
+                (click)="this.openedTab = 'accept'">{{strService.getResource("accept")}}</a>
+        </li>
     </ul>
 
 
@@ -152,10 +156,76 @@
                             </div>
                         </div>
                     </div>
-
+                    <h5 *ngIf="recipe.approved == '1'" class="ms-2">
+                        <span class="badge bg-success fw-bolder">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-check2" viewBox="0 0 16 16">
+                                <path
+                                    d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                            </svg>
+                        </span>
+                    </h5>
+                    <h5 *ngIf="recipe.approved == '0'" class="ms-2">
+                        <span class="badge bg-danger fw-bolder">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                            </svg>
+                        </span>
+                    </h5>
                 </div>
+
+
             </li>
         </ul>
+    </ng-container>
+
+    <ng-container *ngIf="openedTab === 'accept'">
+
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" [ngClass]="acceptOpenedTab == 'accepted'? 'active': ''"
+                    (click)="this.acceptOpenedTab = 'accepted'">{{strService.getResource("accepted")}}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="this.acceptOpenedTab = 'notAccepted'"
+                    [ngClass]="acceptOpenedTab == 'notAccepted'? 'active': ''">{{strService.getResource("pending")}}</a>
+            </li>
+        </ul>
+
+        <div *ngIf="acceptOpenedTab === 'accepted'" class="mb-4">
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let recipe of recipesApproved">
+                    <a (click)="redierctToDetails(recipe.id)" style="cursor: pointer;">{{recipe.title}}</a>
+
+                    <!-- Action Buttons -->
+
+
+                    <div class="btn-group action-btn" role="group" aria-label="Basic outlined example">
+                        <div class="btn-group action-btn" role="group" aria-label="Basic outlined example">
+                            <button type="button" class="btn btn-outline-danger"
+                                (click)="reject(recipe)">{{strService.getResource("reject")}}</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div *ngIf="acceptOpenedTab === 'notAccepted'" class="mb-4">
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let recipe of recipesPending">
+                    <a (click)="redierctToDetails(recipe.id)" style="cursor: pointer;">{{recipe.title}}</a>
+
+                    <!-- Action Buttons -->
+
+
+                    <div class="btn-group action-btn" role="group" aria-label="Basic outlined example">
+                        <button type="button" class="btn btn-outline-success" (click)="accept(recipe)">{{strService.getResource("approve")}}</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+
+
     </ng-container>
 
 </section>

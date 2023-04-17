@@ -84,4 +84,12 @@ export class RecipeService {
 
     return this.http.post<any>("https://www.digitalplant.eu/recipes/api/favorites/get.php?apiId=" + randomApiId, { userId })
   }
+
+  changeApproved(recipeId: string, type: number){
+    const randomApiId = Math.random();
+
+    return this.http.post<any>("https://www.digitalplant.eu/recipes/api/recipes/approve.php?apiId=" + randomApiId, { id: recipeId, approved: type })
+  }
+
+  
 }

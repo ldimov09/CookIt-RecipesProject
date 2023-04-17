@@ -15,7 +15,7 @@
 
 <section class="mt-5 ps-4 pe-4">
 	<ng-container *ngFor="let recipe of recipesShowing">
-		<article class="recipe-card mb-4" style="cursor: pointer;">
+		<article class="recipe-card mb-4" style="cursor: pointer;" *ngIf="recipe.approved == '1'">
 
 			<div class="layout-image">
 				<article class="image" style="background-image: url({{recipe.imageurl}});"></article>

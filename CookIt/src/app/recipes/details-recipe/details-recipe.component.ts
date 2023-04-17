@@ -3,6 +3,7 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { IRecipe } from 'src/app/interfaces/recipe';
+import { IUser } from 'src/app/interfaces/user';
 import { StringResourcesService } from 'src/app/string-resources.service';
 import { slide, fade } from '../../animation/animation';
 import { RecipeService } from '../recipe.service';
@@ -11,7 +12,7 @@ import { RecipeService } from '../recipe.service';
 	selector: 'app-details-recipe',
 	templateUrl: './details-recipe.component.html',
 	styleUrls: ['./details-recipe.component.scss'],
-	animations: [ slide, fade ]
+	animations: [slide, fade]
 })
 export class DetailsRecipeComponent implements OnInit {
 	recipes!: IRecipe[];
@@ -19,6 +20,13 @@ export class DetailsRecipeComponent implements OnInit {
 	router!: Router;
 	isModalOpen: boolean = false;
 	strService: StringResourcesService;
+	user: IUser = {
+		id: "",
+		name: "",
+		email: "",
+		reports: 0,
+		myRecipes: [],
+	  };
 	constructor(
 		private activatedRoute: ActivatedRoute,
 		private recipeService: RecipeService,
@@ -53,6 +61,12 @@ export class DetailsRecipeComponent implements OnInit {
 				this.recipe = response.result;
 				this.reactionRecipe = response.result;
 				this.recipe.servings = Number(this.recipe.servings)
+				this.service.getUserById(this.service.user.id).subscribe({
+					next: (res: any) => {
+						this.user = res.result;
+					},
+					error: () => {}				
+				})
 			},
 			error: (error: string) => {
 			},
@@ -75,8 +89,8 @@ export class DetailsRecipeComponent implements OnInit {
 		});
 	}
 
-	searchAndRedirect(tag: string){
-		this.router.navigate(['/recipes'], { queryParams: { search: tag }} )
+	searchAndRedirect(tag: string) {
+		this.router.navigate(['/recipes'], { queryParams: { search: tag } })
 	}
 
 	deleteRecipe(recipe: IRecipe) {
@@ -94,15 +108,28 @@ export class DetailsRecipeComponent implements OnInit {
 
 	closeModal() {
 		this.isModalOpen = false;
-	  }
-	
-	  handleAction(recipe: IRecipe): void {
-		  this.deleteRecipe(recipe);
-	  }
-	
-	  openModal() {
+	}
+
+	handleAction(recipe: IRecipe): void {
+		this.deleteRecipe(recipe);
+	}
+
+	openModal() {
 		this.isModalOpen = true;
-	  }
+	}
+	changeFavoriteStatus(recipeId: string, newStatus: number) {
+
+
+		this.recipeService.changeFavoriteStatus(recipeId, this.user.id, newStatus).subscribe({
+			next: (response: any) => {
+				this.user = response.result;
+			},
+			error: () => {
+
+			}
+		})
+	}
+
 
 
 }
