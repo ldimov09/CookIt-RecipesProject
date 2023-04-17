@@ -17,7 +17,10 @@ export class FavoritesCatalogComponent {
   strService!: StringResourcesService;
   isLoading: boolean = true;
   service: AuthService;
-
+  videoUrls: any = {
+    '56': 'https://google.com',
+  };
+  url = '';
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -47,6 +50,11 @@ export class FavoritesCatalogComponent {
 
   handleDetails(recipe: IRecipe) {
     this.router.navigate([`/details/${recipe.id}`]);
+  }
+  video(recipe: IRecipe) {
+    if (recipe.id) {
+      this.url = this.videoUrls[recipe.id];
+    }
   }
 
   react(reaction: string, recipe: IRecipe) {

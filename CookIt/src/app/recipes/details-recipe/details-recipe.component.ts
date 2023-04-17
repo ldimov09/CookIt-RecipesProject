@@ -20,6 +20,10 @@ export class DetailsRecipeComponent implements OnInit {
 	router!: Router;
 	isModalOpen: boolean = false;
 	strService: StringResourcesService;
+	videoUrls: any = {
+		'56': 'https://google.com',
+	  };
+	  url = '';
 	user: IUser = {
 		id: "",
 		name: "",
@@ -58,6 +62,9 @@ export class DetailsRecipeComponent implements OnInit {
 	ngOnInit(): void {
 		this.recipeService.getOneRecipe(this.id).subscribe({
 			next: (response: any) => {
+				
+				
+				
 				this.recipe = response.result;
 				this.reactionRecipe = response.result;
 				this.recipe.servings = Number(this.recipe.servings)
@@ -73,6 +80,11 @@ export class DetailsRecipeComponent implements OnInit {
 		});
 
 	}
+	video(recipe: IRecipe) {
+		if (recipe.id) {
+		  this.url = this.videoUrls[recipe.id];
+		}
+	  }
 	react(reaction: string, recipe: IRecipe) {
 		this.recipeService.reactToRecipe(recipe, reaction).subscribe({
 			next: (response) => {

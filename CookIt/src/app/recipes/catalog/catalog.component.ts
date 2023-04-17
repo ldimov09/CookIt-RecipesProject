@@ -18,9 +18,9 @@ export class CatalogComponent implements OnInit {
   recipesShowing: IRecipe[] = [];
   arr: any = [];
   user: IUser = {
-    id: "",
-    name: "",
-    email: "",
+    id: '',
+    name: '',
+    email: '',
     reports: 0,
     myRecipes: [],
   };
@@ -28,7 +28,10 @@ export class CatalogComponent implements OnInit {
   allTags!: ITag[];
   strService!: StringResourcesService;
   isLoading: boolean = true;
-
+  videoUrls: any = {
+    '56': 'https://google.com',
+  };
+  url = '';
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -42,14 +45,13 @@ export class CatalogComponent implements OnInit {
   }
 
   form = new FormGroup({
-    searchTag: new FormControl('', [])
+    searchTag: new FormControl('', []),
   });
 
   handleSearch(form: FormGroup) {
-    console.log(this.form.value)
+    console.log(this.form.value);
 
-    this.search(this.form.value.searchTag!)
-
+    this.search(this.form.value.searchTag!);
   }
 
   ngOnInit() {
@@ -66,9 +68,13 @@ export class CatalogComponent implements OnInit {
         this.isLoading = false;
 
         this.getAllTags();
-
       },
     });
+  }
+  video(recipe: IRecipe) {
+    if (recipe.id) {
+      this.url = this.videoUrls[recipe.id];
+    }
   }
 
   react(reaction: string, recipe: IRecipe) {
@@ -89,64 +95,56 @@ export class CatalogComponent implements OnInit {
   }
 
   getAllTags() {
-    this.recipeService.getAllTags()
-      .subscribe({
-        next: (allTags) => {
-          this.allTags = allTags.result;
-          this.searchByTag(this.activatedRoute.snapshot.queryParamMap.get('search') ? this.activatedRoute.snapshot.queryParamMap.get('search')! : "")
-          if(this.service.isLoggedIn()) {
-            this.getUserById(this.service.user.id);
-          }
-        },
-        error: (error) => {
+    this.recipeService.getAllTags().subscribe({
+      next: (allTags) => {
+        this.allTags = allTags.result;
+        this.searchByTag(
+          this.activatedRoute.snapshot.queryParamMap.get('search')
+            ? this.activatedRoute.snapshot.queryParamMap.get('search')!
+            : ''
+        );
+        if (this.service.isLoggedIn()) {
+          this.getUserById(this.service.user.id);
         }
-      })
+      },
+      error: (error) => {},
+    });
   }
-
 
   getUserById(id: string) {
     this.service.getUserById(id).subscribe({
       next: (response: any) => {
         this.user = response.result;
       },
-      error: () => {
-
-      }
-
-   })
+      error: () => {},
+    });
   }
- 
+
   search(tag: string) {
-    console.log('tuk')
+    console.log('tuk');
     if (tag !== '') {
-      this.recipesShowing = this.recipes.filter(r => r.tags.includes(tag));
+      this.recipesShowing = this.recipes.filter((r) => r.tags.includes(tag));
     } else {
       this.recipesShowing = this.recipes;
     }
   }
 
-
-
   searchByTag(tag: string) {
     this.form.setValue({
       searchTag: tag,
-    })
+    });
 
     this.search(tag);
-
   }
 
-  changeFavoriteStatus(recipeId: string, newStatus: number){
-
-
-    this.recipeService.changeFavoriteStatus(recipeId, this.user.id, newStatus).subscribe({
-      next: (response: any) => {
-        this.user = response.result;
-      }, 
-      error: () => {
-
-      }
-    })
+  changeFavoriteStatus(recipeId: string, newStatus: number) {
+    this.recipeService
+      .changeFavoriteStatus(recipeId, this.user.id, newStatus)
+      .subscribe({
+        next: (response: any) => {
+          this.user = response.result;
+        },
+        error: () => {},
+      });
   }
-
 }
