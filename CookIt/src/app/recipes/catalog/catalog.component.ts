@@ -7,7 +7,7 @@ import { ITag } from 'src/app/interfaces/tag';
 import { IUser } from 'src/app/interfaces/user';
 import { StringResourcesService } from 'src/app/string-resources.service';
 import { RecipeService } from '../recipe.service';
-
+import {videoUrls } from '../../video-urls'
 @Component({
   selector: 'app-catalog',
   templateUrl: './catalog.component.html',
@@ -28,9 +28,7 @@ export class CatalogComponent implements OnInit {
   allTags!: ITag[];
   strService!: StringResourcesService;
   isLoading: boolean = true;
-  videoUrls: any = {
-    '56': 'https://google.com',
-  };
+  videoUrls= videoUrls
   url = '';
 
   constructor(

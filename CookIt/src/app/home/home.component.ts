@@ -5,7 +5,7 @@ import { IRecipe } from '../interfaces/recipe';
 import { RecipeService } from '../recipes/recipe.service';
 import { StringResourcesService } from '../string-resources.service';
 import { IUser } from '../interfaces/user';
-
+import {videoUrls } from '../video-urls'
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -15,16 +15,14 @@ export class HomeComponent {
   service!: AuthService;
   strService! : StringResourcesService;
   recipes!: IRecipe[];
-  videoUrls: any = {
-    '56': 'https://google.com',
-  };
+  
   url = '';
   constructor(service: AuthService, private activatedRoute: ActivatedRoute, private recipeService: RecipeService, private router: Router, strService: StringResourcesService) {
     this.service = service;
     this.strService = strService;
   }
   user: any;
-  
+  videoUrls = videoUrls
   getAllTags() {
     this.recipeService.getAllTags().subscribe({
       next: (allTags) => {
@@ -53,6 +51,7 @@ export class HomeComponent {
         this.recipeService.getAllRecipes().subscribe({
           next: (value: any) => {
             this.recipes = value.result;
+            this.recipes = this.recipes.filter((r)=>r.approved=='1')
             this.recipes.map((r) => {
               r.cooktime = Number(r.cooktime);
               r.servings = Number(r.servings);
@@ -66,7 +65,7 @@ export class HomeComponent {
   }
   video(recipe: IRecipe) {
     if (recipe.id) {
-      this.url = this.videoUrls[recipe.id];
+      this.url = videoUrls[recipe.id];
     }
   }
   react(reaction: string, recipe: IRecipe) {

@@ -11,6 +11,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   get user() {
+    
     let token = localStorage.getItem('token');
     if (!token) return null;
 

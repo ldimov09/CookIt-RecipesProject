@@ -4,7 +4,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { IRecipe } from 'src/app/interfaces/recipe';
 import { StringResourcesService } from 'src/app/string-resources.service';
 import { RecipeService } from '../recipe.service';
-
+import {videoUrls } from '../../video-urls'
 @Component({
   selector: 'app-favorites-catalog',
   templateUrl: './favorites-catalog.component.html',
@@ -17,9 +17,7 @@ export class FavoritesCatalogComponent {
   strService!: StringResourcesService;
   isLoading: boolean = true;
   service: AuthService;
-  videoUrls: any = {
-    '56': 'https://google.com',
-  };
+  videoUrls=videoUrls
   url = '';
 
   constructor(
@@ -37,6 +35,7 @@ export class FavoritesCatalogComponent {
     this.recipeService.getUserFavorites(this.service.user.id).subscribe({
       next: (value: any) => {
         this.recipes = value.result;
+        this.recipes = this.recipes.filter((r)=>r.approved=='1')
         this.recipes.map((r) => {
           r.cooktime = Number(r.cooktime);
           r.servings = Number(r.servings);

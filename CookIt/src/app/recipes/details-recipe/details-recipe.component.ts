@@ -7,7 +7,7 @@ import { IUser } from 'src/app/interfaces/user';
 import { StringResourcesService } from 'src/app/string-resources.service';
 import { slide, fade } from '../../animation/animation';
 import { RecipeService } from '../recipe.service';
-
+import {videoUrls } from '../../video-urls'
 @Component({
 	selector: 'app-details-recipe',
 	templateUrl: './details-recipe.component.html',
@@ -20,9 +20,7 @@ export class DetailsRecipeComponent implements OnInit {
 	router!: Router;
 	isModalOpen: boolean = false;
 	strService: StringResourcesService;
-	videoUrls: any = {
-		'56': 'https://google.com',
-	  };
+	videoUrls=videoUrls
 	  url = '';
 	user: IUser = {
 		id: "",

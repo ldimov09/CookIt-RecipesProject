@@ -79,8 +79,8 @@ export class StringResourcesService {
     {
       "id": "admin",
       "val": {
-        "en": "admin",
-        "bg": "администратор"
+        "en": "Admin",
+        "bg": "Администратор"
       }
     },
     {
@@ -165,6 +165,13 @@ export class StringResourcesService {
       "val": {
         "en": "Favorites",
         "bg": "Любими"
+      }
+    },
+    {
+      "id": "admin",
+      "val": {
+        "en": "Admin",
+        "bg": "Администратор"
       }
     },
     {
