@@ -25,57 +25,11 @@ export class CreateRecipeComponent implements OnInit {
 
 	showTagMenu = false;
 
-	/*
-
-	'Healthy': { checked: false, incompatible: ['Fried', 'Deep Fried', 'Junk Food'] },
-		'Vegan': { checked: false, incompatible: ['Meat', 'Vegetarian', 'Fish'] },
-		'Healthy Smoothie': { checked: false, incompatible: ['Junk Food', 'Fried', 'Deep Fried'] },
-		'Vegetarian': { checked: false, incompatible: ['Meat', 'Vegan'] },
-		'Fruit Smoothie': { checked: false, incompatible: ['Juice', 'Coffee'] },
-		'Fruit Salad': { checked: false, incompatible: [] },
-		'High Protein': { checked: false, incompatible: [] },
-		'Sugar Free': { checked: false, incompatible: ['Sweet', 'Cake'] },
-		'Diary Free': { checked: false, incompatible: [] },
-		'Gluten Free': { checked: false, incompatible: [] },
-		'Salad': { checked: false, incompatible: [] },
-		'Soup': { checked: false, incompatible: [] },
-		'Dressing': { checked: false, incompatible: [] },
-		'BBQ': { checked: false, incompatible: ['Healthy', 'Healthy Smoothie'] },
-		'Pasta': { checked: false, incompatible: [] },
-		'Junk Food': { checked: false, incompatible: ['Healthy', 'Healthy Smoothie'] },
-		'Meat': { checked: false, incompatible: ['Vegan', 'Vegatarian'] },
-		'Dessert': { checked: false, incompatible: [] },
-		'Pizza': { checked: false, incompatible: [] },
-		'Kid\'s Meal': { checked: false, incompatible: [] },
-		'Sweet': { checked: false, incompatible: ['Sugar Free'] },
-		'Quick': { checked: false, incompatible: ['Time-consuming'] },
-		'Cake': { checked: false, incompatible: ['Sugar Free'] },
-		'Microwave': { checked: false, incompatible: [] },
-		'Time-consuming': { checked: false, incompatible: ['Quick'] },
-		'Hot Drink': { checked: false, incompatible: ['Cold Drink'] },
-		'Cold Drink': { checked: false, incompatible: ['Hot Drink'] },
-		'Coffee': { checked: false, incompatible: ['Juice', 'Fruit Smoothie'] },
-		'Juice': { checked: false, incompatible: ['Fruit Smoothie', 'Coffee'] },
-		'Fried': { checked: false, incompatible: ['Deep Fried', 'Healthy', 'Healthy Smoothie'] },
-		'Deep Fried': { checked: false, incompatible: ['Fried', 'Healthy', 'Healthy Smoothie'] },
-		'Baked': { checked: false, incompatible: [] },
-		'Boiled': { checked: false, incompatible: [] },
-		'Stewed': { checked: false, incompatible: [] },
-		'Smoked': { checked: false, incompatible: [] },
-		'Cookies': { checked: false, incompatible: [] },
-		'Fish': { checked: false, incompatible: ['Vegan'] },
-		'Basic': { checked: false, incompatible: ['Easy', 'Advanced', 'For Chefs'] },
-		'Easy': { checked: false, incompatible: ['Basic', 'Advanced', 'For Chefs'] },
-		'Advanced': { checked: false, incompatible: ['Easy', 'Basic', 'For Chefs'] },
-		'For Chefs': { checked: false, incompatible: ['Easy', 'Basic', 'Advanced'] },
-
-
-	*/
-
-	// ^^^ This monstrosity up here is temporary. It will be removed later. ^^^
 	strService: StringResourcesService;
 
-	constructor(private service: AuthService, private recipeService: RecipeService, private router: Router, strService: StringResourcesService) { 
+	selectedFile: File | null = null;
+
+	constructor(private service: AuthService, private recipeService: RecipeService, private router: Router, strService: StringResourcesService) {
 		this.strService = strService;
 
 	}
@@ -83,7 +37,8 @@ export class CreateRecipeComponent implements OnInit {
 	form = new FormGroup({
 		title: new FormControl('', [Validators.required]),
 		description: new FormControl('', [Validators.required]),
-		imageUrl: new FormControl('', [Validators.required]),
+		imageUrl: new FormControl('', []),
+		image: new FormControl(null, [Validators.required]),
 		servings: new FormControl('', [Validators.required]),
 		cooktime: new FormControl('', [Validators.required]),
 	});
@@ -136,6 +91,21 @@ export class CreateRecipeComponent implements OnInit {
 				selectedTags.push(this.allTags[key].id);
 			}
 		}
+
+		const formData = new FormData();
+		formData.append('owner', this.service.user.id);
+		formData.append('title', this.form.value.title!);
+		formData.append('description', this.form.value.description!);
+		formData.append('tags', JSON.stringify(selectedTags));
+		formData.append('ingredients', JSON.stringify(this.recipeIngredients));
+		formData.append('imageurl', this.form.value.imageUrl!);
+		if (this.selectedFile != null) {
+			formData.append('image', this.selectedFile);
+		}
+		formData.append('cooktime', this.form.value.cooktime!);
+		formData.append('servings', this.form.value.servings!);
+
+		/*
 		const formValue = {
 			owner: this.service.user.id,
 			title: this.form.value.title!,
@@ -143,25 +113,35 @@ export class CreateRecipeComponent implements OnInit {
 			tags: selectedTags,
 			ingredients: this.recipeIngredients!,
 			imageurl: this.form.value.imageUrl!,
+			image: this.selectedFile,
 			cooktime: Number(this.form.value.cooktime)!,
 			servings: this.form.value.servings
-
 		};
+		*/
 
-
-
-		this.recipeService.createRecipe(formValue)
+		this.recipeService.createRecipe(formData)
 			.subscribe({
 
 				next: (response: any) => {
-					if(response.success){
+					if (response.success) {
 						this.router.navigate(['/recipes'])
 					}
 
 				},
 				error: (err) => {
+
 				}
 			})
+	}
+
+	onFileSelected(event: Event) {
+		const target = event.target as HTMLInputElement;
+		if (target.files && target.files.length > 0) {
+			const file = target.files[0];
+			if (file) {
+				this.selectedFile = file; // Store the file in the selectedFile property
+			}
+		}
 	}
 
 	toggleTag(tag: string) {
@@ -210,7 +190,7 @@ export class CreateRecipeComponent implements OnInit {
 	removeIng(ing: string) {
 		this.recipeIngredients.splice(this.recipeIngredients.indexOf(ing), 1);
 	}
-
+	
 
 }
 

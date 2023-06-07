@@ -23,8 +23,10 @@ export class RecipeService {
 
   }
 
-  createRecipe(recipe: IRecipe){
+  createRecipe(recipe: FormData){
     const randomApiId = Math.random();
+
+    console.log(recipe);
 
     return this.http.post<any>('https://www.digitalplant.eu/recipes/api/recipes/create.php?apiId=' + randomApiId, recipe);
   }

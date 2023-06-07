@@ -23,7 +23,18 @@ export class EditRecipeComponent implements OnInit {
 
 	}
 	id: string = this.activatedRoute.snapshot.params?.['id'];
-	recipe!: IRecipe; //What is this? More self explaing variable names!
+	recipe: IRecipe = {
+		owner: "",
+		tags: [],
+		description: "",
+		ingredients: [],
+		imageurl: '',
+		title: "",
+		servings: 0,
+		cooktime: 0,
+
+	};
+ 
 	ngOnInit() {
 		this.recipeService.getAllTags().subscribe({
 			next: (allTags) => {
@@ -60,12 +71,13 @@ export class EditRecipeComponent implements OnInit {
 				this.selectedTagsKeys = this.recipe.tags;
 				this.recipeIngredients = this.recipe.ingredients;
 
+				console.log(this.recipe);
+
 				this.form.patchValue({
 					title: this.recipe.title,
 					cooktime: this.recipe.cooktime as unknown as string,
 					servings: this.recipe.servings,
 					description: this.recipe.description,
-					imageurl: this.recipe.imageurl,
 				});
 			},
 
@@ -86,6 +98,7 @@ export class EditRecipeComponent implements OnInit {
 	allTagsIds!: string[];
 	returnToAdmin: boolean = Boolean(this.activatedRoute.snapshot.queryParamMap.get('return'))
 
+	selectedFile: File | null = null;
 
 	recipeIngredients!: string[];
 
@@ -94,7 +107,7 @@ export class EditRecipeComponent implements OnInit {
 	form = new FormGroup({
 		title: new FormControl('', [Validators.required]),
 		description: new FormControl('', [Validators.required]),
-		imageurl: new FormControl('', [Validators.required]),
+		image: new FormControl(null, []),
 		servings: new FormControl('', [Validators.required]),
 		cooktime: new FormControl('', [Validators.required]),
 
@@ -145,6 +158,16 @@ export class EditRecipeComponent implements OnInit {
 		this.showTagMenu = false;
 	}
 
+	onFileSelected(event: Event) {
+		const target = event.target as HTMLInputElement;
+		if (target.files && target.files.length > 0) {
+			const file = target.files[0];
+			if (file) {
+				this.selectedFile = file; // Store the file in the selectedFile property
+			}
+		}
+	}
+
 	toggleTagMenu() {
 		this.showTagMenu = !this.showTagMenu;
 	}
@@ -156,7 +179,7 @@ export class EditRecipeComponent implements OnInit {
 		this.recipeIngredients.splice(this.recipeIngredients.indexOf(ing), 1);
 	}
 	handleEdit(form: FormGroup) {
-		const recipe = form.value;
+		/*const recipe = form.value;
 		recipe['id'] = this.recipe.id;
 		recipe['owner'] = this.recipe.owner;
 		recipe['tags'] = this.selectedTagsKeys.map(key => this.allTags[key].id);
@@ -167,17 +190,30 @@ export class EditRecipeComponent implements OnInit {
 		recipe['cooktime'] = this.form.value.cooktime;
 		recipe['servings'] = this.form.value.servings;
 		recipe['description'] = this.form.value.description;
-		console.log(recipe);
+		recipe['descriimageption'] = this.form.value.description;
+		console.log(recipe);*/
 
-		this.recipeService.editRecipe(recipe).subscribe({
+		const formData = new FormData();
+		formData.append('id', this.recipe.id!);
+		formData.append('title', this.form.value.title!);
+		formData.append('description', this.form.value.description!);
+		formData.append('tags', JSON.stringify(this.selectedTagsKeys.map(key => this.allTags[key].id)));
+		formData.append('ingredients', JSON.stringify(this.recipeIngredients));
+		if (this.selectedFile != null) {
+			formData.append('image', this.selectedFile);
+		}
+		formData.append('cooktime', this.form.value.cooktime!);
+		formData.append('servings', this.form.value.servings!);
+
+		this.recipeService.editRecipe(formData).subscribe({
 			next: (response: any) => {
 				//console.log(response.result);
 				if (response.success) {
 
 					if (this.returnToAdmin) {
-						this.router.navigate(['/details/' + recipe.id], { queryParams: { return: true } })
+						this.router.navigate(['/details/' + this.recipe.id], { queryParams: { return: true } })
 					} else {
-						this.router.navigate(['/details/' + recipe.id])
+						this.router.navigate(['/details/' + this.recipe.id])
 					}
 
 				}

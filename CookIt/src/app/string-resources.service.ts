@@ -523,7 +523,7 @@ export class StringResourcesService {
     }
   ]
 
-  lang = 'bg'
+  lang = 'en';
 
   constructor() { }
 

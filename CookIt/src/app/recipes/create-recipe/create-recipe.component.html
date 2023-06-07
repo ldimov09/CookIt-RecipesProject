@@ -43,14 +43,25 @@
         <div *ngIf="description?.touched && description?.invalid" class="alert alert-danger">
             <div *ngIf="description?.errors?.['required']">{{strService.getResource("instructions")}} {{strService.getResource("is_required")}}.</div>
         </div>
-        <div class="form-floating mb-2">
-            <input formControlName="imageUrl" type="text" class="form-control" id="floatingPassword"
-                placeholder="Title">
+
+        <!-- I comment this in case I need it some time in teh future. -->
+        <!--<div class="form-floating mb-2">
             <label for="floatingPassword">{{strService.getResource("image_link")}}</label>
         </div>
+    
         <div *ngIf="imageUrl?.touched && imageUrl?.invalid" class="alert alert-danger">
             <div *ngIf="imageUrl?.errors?.['required']">{{strService.getResource("image_link")}} {{strService.getResource("is_required")}}.</div>
         </div>
+        -->
+
+        <div class="mb-2">
+            <input formControlName="imageUrl" type="hidden" class="form-control" id="floatingPassword" value="example.com"
+                placeholder="Title">
+            <input type="file" formControlName="image" accept="image/png, image/jpg, image/jpeg, image/gif" (change)="onFileSelected($event)">
+        </div>
+
+        
+
         <div class="form-floating mb-2">
             <input formControlName="cooktime" type="text" class="form-control" id="floatingPassword"
                 placeholder="Title">

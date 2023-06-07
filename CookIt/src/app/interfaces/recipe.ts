@@ -12,4 +12,5 @@ export interface IRecipe {
   servings: any;
   cooktime: number;
   approved?: string;
+  image?: File;
 }
