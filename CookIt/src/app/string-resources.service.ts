@@ -7,6 +7,13 @@ export class StringResourcesService {
 
   data = [
     {
+      "id": "copyright",
+      "val": {
+        "en": "Warning! Place a copyright string for the image at the end of your recipe description. Recepies without theese strings will not be approved by administrators!", 
+        "bg": "Внимание! Сложете текст за авторски права в края на начина на приготвяне на вашата рецепта. Рецепти без такъв текст няма да бъадт одобрени от администратор!"
+      }
+    },
+    {
       "id": "pending",
       "val": {
         "en": "Pending", 
@@ -523,7 +530,7 @@ export class StringResourcesService {
     }
   ]
 
-  lang = 'en';
+  lang = 'bg';
 
   constructor() { }
 
